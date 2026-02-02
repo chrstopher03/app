@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estado de Ánimo - Christopher & Genesy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  color:#4b0082;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.container{
+  max-width:480px;
+  width:100%;
+  background:#ffffffdd;
+  border-radius:25px;
+  padding:30px 25px 80px; /* más padding abajo para nav */
+  box-shadow:0 12px 25px rgba(0,0,0,.2);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:20px;
+}
+h1{
+  color:#6c3483;
+  margin-bottom:15px;
+}
+/* BOTONES ESTADOS */
+.emociones{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+.emociones button{
+  background:linear-gradient(135deg,#f39c12,#d35400);
+  color:#fff;
+  border:none;
+  padding:14px 22px;
+  border-radius:25px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+  font-size:1em;
+}
+.emociones button:hover{
+  transform:scale(1.1);
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+/* MENSAJE DE APOYO */
+.mensaje{
+  font-weight:600;
+  font-size:1.1em;
+  min-height:50px;
+  color:#4b0082;
+  background:#ffffffaa;
+  padding:12px 15px;
+  border-radius:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+/* BARRA DE CARIÑO */
+.barra-container{
+  width:100%;
+  background:#e0d7ec;
+  border-radius:25px;
+  overflow:hidden;
+  height:35px;
+  margin-top:10px;
+}
+.barra{
+  height:100%;
+  width:0%;
+  background:linear-gradient(135deg,#8e44ad,#6c3483);
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:700;
+  font-size:1em;
+  transition:width 1.5s ease;
+}
+/* BOTON CARIÑO */
+.boton-cariño{
+  background:linear-gradient(135deg,#8e44ad,#6c3483);
+  color:#fff;
+  border:none;
+  padding:14px 20px;
+  border-radius:25px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+  margin-bottom:10px;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+}
+.boton-cariño:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+/* NAV BAR */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.25);
+}
+.nav a{
+  text-decoration:none;
+  color:#8e44ad;
+  font-weight:600;
+  text-align:center;
+  font-size:.85em;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>¿Cómo te sientes hoy?</h1>
+  <div class="emociones">
+    <button onclick="seleccionar('Feliz')">😊 Feliz</button>
+    <button onclick="seleccionar('Triste')">😢 Triste</button>
+    <button onclick="seleccionar('Enojada')">😡 Enojada</button>
+    <button onclick="seleccionar('Estresada')">😫 Estresada</button>
+  </div>
+
+  <div class="mensaje" id="mensaje">✨ Aquí aparecerá tu mensaje de apoyo ✨</div>
+
+  <h3>¿Quieres saber cuánto te quiere Chris?</h3>
+  <button class="boton-cariño" onclick="mostrarCariño()">💜 Mostrar</button>
+  <div class="barra-container">
+    <div class="barra" id="barra">0%</div>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="index.html">🏠<br>Inicio</a>
+  <a href="album.html">📖<br>Álbum</a>
+  <a href="musica.html">🎵<br>Música</a>
+  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
+</div>
+
+<script>
+const mensajes={
+  "Feliz":"Así tiene que estar siempre mi niña 😄 Eres la más linda y siempre quiero verte feliz 💖",
+  "Triste":"Tranquila, no pasa nada por sentirte así. Estoy aquí para ti 💜",
+  "Enojada":"Respira profundo 😌 Todo se puede solucionar poco a poco 💫",
+  "Estresada":"Tómate un descanso 🌸 La vida también necesita pausas 💖",
+};
+
+function seleccionar(emocion){
+  document.getElementById("mensaje").innerText = mensajes[emocion] || "💜 Todo estará bien 💜";
+}
+
+// Función para mostrar barra de cariño
+function mostrarCariño(){
+  const barra=document.getElementById("barra");
+  barra.style.width="100%";
+  let i=0;
+  const anim=setInterval(()=>{
+    i++;
+    barra.innerText=i+"%";
+    if(i>=100) clearInterval(anim);
+  },15);
+}
+</script>
+
+</body>
+</html>

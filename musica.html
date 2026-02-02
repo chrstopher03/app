@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Música - Christopher & Genesy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+* {box-sizing:border-box;margin:0;padding:0;font-family:Poppins;}
+body{
+  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  color:#4b0082;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+/* TITULO */
+h1{
+  margin-bottom:25px;
+  color:#ffffff;
+  text-align:center;
+  font-size:1.8em;
+}
+
+/* CONTENEDOR DE CANCIONES */
+.albumMusical{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:30px;
+  width:100%;
+  max-width:500px;
+  padding-bottom: 100px; /* espacio extra para que la última canción no quede pegada al nav */
+  overflow-y: auto; /* permite scroll si hay muchas canciones */
+}
+
+/* CANCION */
+.cancion{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background:#ffffffcc;
+  border: 2px solid #8e44ad;
+  border-radius:25px;
+  padding:20px;
+  width:100%;
+  box-shadow: 0 12px 25px rgba(142,68,173,0.2);
+  transition: transform .3s, box-shadow .3s;
+}
+.cancion:hover{
+  transform: scale(1.05);
+  box-shadow: 0 20px 35px rgba(142,68,173,0.35);
+}
+
+/* DISCO GIRATORIO */
+.disco{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  overflow:hidden;
+  margin-bottom:15px;
+  border: 5px solid #8e44ad;
+  box-shadow: 0 8px 25px rgba(142,68,173,0.35);
+  animation: girar 6s linear infinite;
+}
+.disco img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  transition: transform .3s;
+}
+.cancion:hover .disco img{
+  transform: scale(1.08);
+}
+
+/* NOMBRE DE LA CANCION */
+.cancion h3{
+  color:#6c3483;
+  font-size:1.2em;
+  margin-bottom:12px;
+  text-align:center;
+  font-weight:600;
+}
+
+/* REPRODUCTOR */
+audio{
+  width:100%;
+  outline:none;
+  border-radius:12px;
+  margin-top:10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ANIMACION DISCO */
+@keyframes girar{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ffffff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(142,68,173,0.25);
+  border-top: 2px solid #8e44ad;
+  z-index:100;
+}
+.nav a{
+  text-decoration:none;
+  color:#8e44ad;
+  font-weight:600;
+  text-align:center;
+  font-size:.85em;
+  transition:.2s;
+}
+.nav a:hover{
+  color:#6c3483;
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<h1>🎵 Álbum de Música</h1>
+
+<div class="albumMusical" id="albumMusical">
+  <!-- Las canciones se insertarán aquí con JS -->
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="index.html">🏠<br>Inicio</a>
+  <a href="album.html">📖<br>Álbum</a>
+  <a href="musica.html">🎵<br>Música</a>
+  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
+</div>
+<script>
+// Álbum de canciones
+const canciones = [
+  {titulo:"halley's comet-billie eilish ", img:"01.jpg", audio:"cancion1.mp3"},
+  {titulo:"My One And Only Love- Mon laferte", img:"02.jpg", audio:"cancion2.mp3"},
+  {titulo:"Los Gemelos De Sinaloa - AMOR", img:"03.jpg", audio:"cancion3.mp3"},
+  
+];
+
+const contenedor = document.getElementById("albumMusical");
+
+// Crear cada canción en el DOM
+canciones.forEach(c => {
+  const div = document.createElement("div");
+  div.className = "cancion";
+
+  div.innerHTML = `
+    <div class="disco">
+      <img src="${c.img}" alt="${c.titulo}">
+    </div>
+    <h3>${c.titulo}</h3>
+    <audio controls>
+      <source src="${c.audio}" type="audio/mpeg">
+      Tu navegador no soporta el audio.
+    </audio>
+  `;
+
+  contenedor.appendChild(div);
+});
+</script>
+
+</body>
+</html>

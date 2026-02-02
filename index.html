@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christopher & Genesy App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  color:#4b0082;
+  min-height:100vh;
+  padding:20px 15px 100px;
+  overflow-x:hidden;
+}
+
+/* ----------------- PANTALLA DE INGRESO ----------------- */
+.ingreso-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  gap:20px;
+}
+.candado{
+  font-size:6em;
+  color:#6c3483;
+  cursor:pointer;
+  transition:.3s;
+}
+.candado:hover{
+  transform:scale(1.2);
+}
+.input-pass{
+  display:none;
+  margin-top:15px;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+.pin{
+  width:50px;
+  height:50px;
+  text-align:center;
+  font-size:1.5em;
+  border-radius:12px;
+  border:none;
+  outline:none;
+  background:#ffffffcc;
+  color:#4b0082;
+  font-weight:700;
+}
+.input-pass button{
+  background:#6c3483;
+  color:#fff;
+  border:none;
+  padding:12px 25px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.input-pass button:hover{background:#4b0082;}
+
+/* ----------------- AYUDANTE FLOTANTE ----------------- */
+.ayudante{
+  position:fixed;
+  bottom:120px;
+  right:20px;
+  background:#ffffffcc;
+  color:#4b0082;
+  padding:15px 20px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  font-weight:600;
+  display:none;
+  max-width:220px;
+  text-align:center;
+  animation:fadeIn 0.5s ease forwards;
+}
+
+/* ----------------- APP ----------------- */
+.app{
+  max-width:430px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  display:none; /* oculto hasta ingresar */
+}
+
+h1,h2,h3{text-align:center;}
+
+/* CONTADOR */
+.contador{
+  background:#ffffffcc;
+  padding:28px 20px;
+  border-radius:28px;
+  box-shadow:0 12px 20px rgba(0,0,0,.2);
+}
+.contador span{
+  display:block;
+  font-size:3em;
+  font-weight:700;
+  color:#8e44ad;
+  margin-top:10px;
+}
+
+/* SECCIONES */
+.section{
+  background:#ffffffdd;
+  border-radius:25px;
+  padding:22px;
+  box-shadow:0 8px 15px rgba(0,0,0,.15);
+}
+
+/* JUEGO PRO */
+.juego{
+  background:linear-gradient(135deg,#8e44ad,#6c3483);
+  color:#fff;
+}
+#preguntaJuego{
+  background:rgba(255,255,255,.18);
+  padding:14px;
+  border-radius:14px;
+  margin:15px 0;
+  text-align:center;
+  font-weight:600;
+}
+#opcionesJuego{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+#opcionesJuego button{
+  background:white;
+  color:#4b0082;
+  border:none;
+  border-radius:14px;
+  padding:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+#opcionesJuego button:hover{
+  background:#f4ecf7;
+  transform:scale(1.03);
+}
+
+/* BOTONES */
+button{
+  background:#8e44ad;
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+button:hover{background:#6c3483;}
+
+/* CARTITA */
+.mensaje-cartita{
+  margin-top:15px;
+  text-align:center;
+  min-height:45px;
+}
+
+/* ALERTA */
+.alerta-juego{
+  position:fixed;
+  top:20%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:18px 26px;
+  border-radius:22px;
+  color:#fff;
+  font-weight:600;
+  display:none;
+  z-index:1000;
+}
+.alerta-juego.correcto{background:#27ae60;}
+.alerta-juego.incorrecto{background:#c0392b;}
+
+/* NAV BAR */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.25);
+}
+.nav a{
+  text-decoration:none;
+  color:#8e44ad;
+  font-weight:600;
+  text-align:center;
+  font-size:.85em;
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes abrirCandado{0%{transform:rotate(0deg);}50%{transform:rotate(25deg);}100%{transform:rotate(0deg);}}
+</style>
+</head>
+
+<body>
+
+<!-- PANTALLA DE INGRESO -->
+<div class="ingreso-overlay" id="ingresoOverlay">
+  <div class="candado" id="candado">🔒</div>
+  <h2>Haz clic en el candado para ingresar 💜</h2>
+  <div class="input-pass" id="inputPass">
+    <div style="display:flex; gap:12px;">
+      <input type="text" maxlength="1" class="pin" id="pin1">
+      <input type="text" maxlength="1" class="pin" id="pin2">
+      <input type="text" maxlength="1" class="pin" id="pin3">
+      <input type="text" maxlength="1" class="pin" id="pin4">
+    </div>
+    <button onclick="verificarPin()" style="margin-top:15px;">Ingresar</button>
+  </div>
+</div>
+
+<!-- AYUDANTE FLOTANTE -->
+<div class="ayudante" id="ayudante">
+  Hola Genesy 😄<br>No te sabes la contraseña, tranquila, yo te ayudo: es el día y el mes que empezaron a hablar 💜
+</div>
+
+<!-- CONTENIDO APP -->
+<div class="app">
+<h1>💜 Christopher & Genesy 💜</h1>
+<h2>Tu app</h2>
+
+<!-- CONTADOR -->
+<div class="contador" style="text-align:center;">
+  <h3>Días que llevamos conociéndonos</h3>
+  <span id="dias">0</span>
+</div>
+
+<!-- JUEGO -->
+<div class="section juego">
+  <h3>⚡ Juego mágico del día</h3>
+  <p id="preguntaJuego"></p>
+  <div id="opcionesJuego"></div>
+</div>
+
+<!-- CARTITA -->
+<div class="section">
+  <h3>¿Quieres saber qué piensa de ti Christopher hoy?</h3>
+  <button onclick="mostrarCartita()" style="display:block; margin:0 auto;">Ver mensaje</button>
+  <p class="mensaje-cartita" id="mensajeCartita">✨ Aquí aparecerá tu mensaje ✨</p>
+</div>
+<!-- ALERTA -->
+<div id="alertaJuego" class="alerta-juego"></div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="index.html">🏠<br>Inicio</a>
+  <a href="album.html">📖<br>Álbum</a>
+  <a href="musica.html">🎵<br>Música</a>
+  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
+</div>
+
+<script>
+// -----------------------
+// INTERACTIVIDAD CANDADO
+// -----------------------
+const candado = document.getElementById("candado");
+const inputPass = document.getElementById("inputPass");
+
+candado.addEventListener("click", ()=>{
+  inputPass.style.display="flex";
+  candado.style.animation="abrirCandado 0.6s forwards";
+});
+
+// -----------------------
+// VERIFICAR PIN DE 4 CUADROS
+// -----------------------
+function verificarPin(){
+  const pin1 = document.getElementById("pin1").value;
+  const pin2 = document.getElementById("pin2").value;
+  const pin3 = document.getElementById("pin3").value;
+  const pin4 = document.getElementById("pin4").value;
+  const codigo = pin1 + pin2 + pin3 + pin4;
+
+  if(codigo === "1901"){
+    document.getElementById("ingresoOverlay").style.display="none";
+    document.querySelector(".app").style.display="flex";
+  } else {
+    const ayudante = document.getElementById("ayudante");
+    ayudante.style.display="block";
+    setTimeout(()=>{ayudante.style.display="none";},4000);
+  }
+}
+
+// -----------------------
+// CONTADOR
+// -----------------------
+const fechaInicio=new Date();
+fechaInicio.setDate(fechaInicio.getDate()-17);
+function actualizarDias(){
+  const h=new Date();
+  dias.innerText=Math.floor((h-fechaInicio)/(1000*60*60*24))+1;
+}
+actualizarDias();
+
+// -----------------------
+// JUEGO
+// -----------------------
+const juegos = [
+  {p:"¿Casa de Harry Potter?", o:["Gryffindor","Slytherin","Ravenclaw"], c:"Gryffindor"},
+  {p:"¿Mejor amigo de Harry?", o:["Ron","Draco","Neville"], c:"Ron"},
+  {p:"¿Hechizo para desarmar?", o:["Expelliarmus","Lumos","Crucio"], c:"Expelliarmus"},
+  {p:"¿Animal mágico de Hagrid?", o:["Hipogrifo","Dragón","Acromántula"], c:"Hipogrifo"},
+  {p:"¿Profesor de Pociones?", o:["Snape","Lupin","Dumbledore"], c:"Snape"},
+  {p:"¿Quidditch es un deporte de?", o:["Muggles","Magos","Dragones"], c:"Magos"},
+  {p:"¿El mapa del merodeador muestra?", o:["Secretos","Pasadizos","Personas"], c:"Personas"},
+  {p:"¿Amigo de Hermione?", o:["Ron","Draco","Neville"], c:"Ron"},
+  {p:"¿El nombre del elfo doméstico?", o:["Dobby","Kreacher","Winky"], c:"Dobby"},
+  {p:"¿Varita de Harry hecha de?", o:["Acebo","Cerezo","Roble"], c:"Acebo"}
+];
+
+// Para seleccionar 5 preguntas aleatorias cada día
+const preguntasDia = [];
+while(preguntasDia.length < 5){
+  const idx = Math.floor(Math.random() * juegos.length);
+  if(!preguntasDia.includes(juegos[idx])) preguntasDia.push(juegos[idx]);
+}
+
+let preguntaActual = 0;
+
+function mostrarPregunta(){
+  const pregunta = preguntasDia[preguntaActual];
+  preguntaJuego.innerText = pregunta.p;
+  opcionesJuego.innerHTML = "";
+  pregunta.o.forEach(op=>{
+    const b = document.createElement("button");
+    b.innerText = op;
+    b.onclick = () => responderPregunta(op === pregunta.c);
+    opcionesJuego.appendChild(b);
+  });
+}
+
+function responderPregunta(correcto){
+  alertaJuego.className = "alerta-juego " + (correcto?"correcto":"incorrecto");
+  alertaJuego.innerText = correcto?"✨ Muy bien ✨":"💫 Intenta otra vez";
+  alertaJuego.style.display="block";
+  setTimeout(()=>alertaJuego.style.display="none",2000);
+
+  if(correcto){
+    preguntaActual++;
+    if(preguntaActual >= preguntasDia.length){
+      preguntaJuego.innerText = "🎉 Juego terminado por hoy 🎉";
+      opcionesJuego.innerHTML = "";
+      return;
+    }
+    setTimeout(mostrarPregunta, 800); // pequeña pausa antes de la siguiente
+  }
+}
+
+// Mostrar la primera pregunta
+mostrarPregunta()
+
+// -----------------------
+// CARTITA
+// -----------------------
+const mensajes = [
+  "Hola, mi niña hermosa 💖. Quiero decirte que eres la persona más espectacular que he conocido. Admiro cada cosa de ti, tu forma de ser, tu sonrisa, tu corazón… todo en ti me inspira. Quiero ser parte de tu vida, llenarla de amor y felicidad porque tú mereces lo más bonito del mundo.\n\nEres la persona que quiero a mi lado, hoy y siempre. Sueño con que podamos construir juntos una vida llena de momentos felices, hacernos viejitos juntos, reírnos de todo, apoyarnos en todo y formar una familia hermosa, llena de amor y alegría.\n\nQuiero estar contigo en cada instante, ser tu apoyo, tu compañía, tu refugio… quiero verte, abrazarte y decirte con el corazón lo mucho que te quiero y lo importante que eres para mí. Cada día que pasa, mis sentimientos por ti crecen más y más, y solo deseo hacerte feliz.\n\nTe quiero muchísimo, mi princesa, y quiero que siempre recuerdes que eres mi todo. Muaaak 😘💖",
+
+  "Hola, mi niña hermosa 💖. Quiero decirte que eres la persona más espectacular que he conocido. Admiro cada cosa de ti, tu forma de ser, tu sonrisa, tu corazón… todo en ti me inspira. Quiero ser parte de tu vida, llenarla de amor y felicidad porque tú mereces lo más bonito del mundo.\n\nEres la persona que quiero a mi lado, hoy y siempre. Sueño con que podamos construir juntos una vida llena de momentos felices, hacernos viejitos juntos, reírnos de todo, apoyarnos en todo y formar una familia hermosa, llena de amor y alegría.\n\nQuiero estar contigo en cada instante, ser tu apoyo, tu compañía, tu refugio… quiero verte, abrazarte y decirte con el corazón lo mucho que te quiero y lo importante que eres para mí. Cada día que pasa, mis sentimientos por ti crecen más y más, y solo deseo hacerte feliz.\n\nTe quiero muchísimo, mi princesa, y quiero que siempre recuerdes que eres mi todo. Muaaak 😘💖",
+  "Cada día me gustas un poco más ✨",
+  "Gracias por existir 💫"
+];
+
+function mostrarCartita(){
+  mensajeCartita.innerText=mensajes[new Date().getDate()%mensajes.length];
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Álbum de Genesy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Poppins;}
+
+body{
+  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  color: #4b0082;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* CONTENEDOR APP */
+.app{
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* TITULO */
+h1{
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #6c3483;
+}
+
+/* LIBRO */
+.libro{
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(142,68,173,0.35),
+              inset 0 0 0 1px rgba(142,68,173,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: 0.3s;
+  border: 3px solid #8e44ad;
+}
+
+/* FOTO */
+.foto{
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(142,68,173,0.35);
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.foto img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform .3s ease;
+}
+.foto:hover img{
+  transform: scale(1.05);
+}
+
+/* TEXTO */
+.texto{
+  text-align: center;
+  font-size: 1em;
+  opacity: 0.85;
+  line-height: 1.5;
+  color: #6c3483;
+  font-weight: 500;
+}
+
+/* CONTROLES */
+.controles{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 420px;
+  margin: 20px 0; /* margen arriba y abajo para separarlo */
+}
+.controles button{
+  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 10px 20px rgba(142,68,173,0.35);
+}
+.controles button:hover{
+  transform: translateY(-3px) scale(1.05);
+}
+/* NAV */
+.nav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  box-shadow: 0 -6px 20px rgba(142,68,173,0.25);
+  border-top: 2px solid #8e44ad;
+}
+.nav a{
+  text-decoration: none;
+  color: #8e44ad;
+  font-weight: 600;
+  text-align: center;
+  font-size: .85em;
+}
+
+/* MODAL ZOOM */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+.modal img{
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(142,68,173,0.5);
+  transition: transform 0.3s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<h1>📖 Nuestro Álbum</h1>
+
+<div class="libro">
+  <div class="foto" id="fotoZoom">
+    <img id="imagen" src="04.jpeg" alt="Foto">
+  </div>
+  <div class="texto" id="descripcion">
+    Nuestro primer recuerdo 💜
+  </div>
+</div>
+
+<div class="controles">
+  <button onclick="anterior()">⬅ Anterior</button>
+  <button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+</div>
+
+<!-- MODAL ZOOM -->
+<div class="modal" id="modalZoom">
+  <img id="imagenModal" src="" alt="Zoom">
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="index.html">🏠<br>Inicio</a>
+  <a href="album.html">📖<br>Álbum</a>
+  <a href="musica.html">🎵<br>Música</a>
+  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
+</div>
+
+<script>
+// Álbum
+const album = [
+  {img:"06.jpeg", text:"Vea mi niña yo de pequeño💜"},
+  {img:"05.jpeg", text:" Esta foto me gustaa"},
+  {img:"07.jpeg", text:"Ella es la mas lindita, mi preciosa, mi esposita estoy enamorado de ella 🌸😍"},
+  {img:"09.jpeg", text:"JAJAJAJAJ"},
+  {img:"10.jpeg", text:"cuando cree mi marca jaja"},
+  {img:"04.jpeg", text:"Esa no me gusta sjsjs"}
+];
+
+let actual = 0;
+
+// Mostrar imagen y texto
+function mostrar(){
+  const img = document.getElementById("imagen");
+  const desc = document.getElementById("descripcion");
+
+  img.src = album[actual].img;
+  desc.innerText = album[actual].text;
+}
+
+// Cambiar foto siguiente
+function siguiente(){
+  actual = (actual + 1) % album.length;
+  mostrar();
+}
+
+// Cambiar foto anterior
+function anterior(){
+  actual = (actual - 1 + album.length) % album.length;
+  mostrar();
+}
+
+// Modal zoom
+const fotoZoom = document.getElementById("fotoZoom");
+const modal = document.getElementById("modalZoom");
+const imagenModal = document.getElementById("imagenModal");
+
+fotoZoom.addEventListener("click", ()=>{
+  imagenModal.src = album[actual].img;
+  modal.style.display = "flex";
+  imagenModal.style.transform = "scale(0.8)";
+  setTimeout(()=>{imagenModal.style.transform = "scale(1)";},50);
+});
+
+modal.addEventListener("click", ()=>{
+  modal.style.display = "none";
+});
+
+// Swipe táctil (móviles)
+let touchstartX = 0;
+let touchendX = 0;
+const libro = document.querySelector(".libro");
+
+libro.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, false);
+libro.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX;
+  if (touchendX < touchstartX - 50) siguiente();
+  if (touchendX > touchstartX + 50) anterior();
+}, false);
+
+// Mostrar inicial
+mostrar();
+</script>
+
+</body>
+</html>
