@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christopher & Genesy App</title>
+<title>Nesy</title>
+    <link rel="icon" href="icono.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -14,9 +15,10 @@ body{
   background:linear-gradient(135deg,#8e44ad,#ffffff);
   color:#4b0082;
   min-height:100vh;
-  padding:20px 15px 100px;
+  padding:20px 15px 160px; /* ⬅ MÁS ESPACIO ABAJO */
   overflow-x:hidden;
 }
+
 
 /* ----------------- PANTALLA DE INGRESO ----------------- */
 .ingreso-overlay{
@@ -98,6 +100,34 @@ body{
   gap:25px;
   display:none; /* oculto hasta ingresar */
 }
+/* GRID SUPERIOR */
+.top-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+/* TARJETA ESTADÍSTICAS */
+.estadisticas{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* CANDADO PRO */
+.candado{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle at top,#ffffff,#e6d4f2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:3.5em;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
 
 h1,h2,h3{text-align:center;}
 
@@ -175,6 +205,64 @@ button:hover{background:#6c3483;}
   text-align:center;
   min-height:45px;
 }
+/* -------- CALENDARIO -------- */
+.calendario{
+  text-align:center;
+}
+
+.cal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.cal-header button{
+  background:#8e44ad;
+  border:none;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:10px;
+}
+
+.dias-semana{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  font-weight:600;
+  margin-bottom:5px;
+}
+
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.cal-grid div{
+  padding:10px;
+  border-radius:12px;
+  background:#ffffffcc;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.cal-grid div.marcado{
+  background:#8e44ad;
+  color:#fff;
+}
+
+.nota-dia{
+  margin-top:15px;
+}
+
+.nota-dia textarea{
+  width:100%;
+  height:80px;
+  border-radius:12px;
+  padding:10px;
+  border:none;
+  font-family:'Poppins';
+}
 
 /* ALERTA */
 .alerta-juego{
@@ -211,44 +299,363 @@ button:hover{background:#6c3483;}
   text-align:center;
   font-size:.85em;
 }
+.modal-stats{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+  animation:fadeIn .3s ease;
+}
 
+.modal-content{
+  background:#fff;
+  width:90%;
+  max-width:380px;
+  border-radius:30px;
+  padding:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+  animation:subir .35s ease;
+}
+
+/* SPLASH SCREEN */
+#splash{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#8e44ad,#f5eef8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  animation:fadeOut 1s ease forwards;
+  animation-delay:2.5s;
+}
+
+#splash img{
+  width:200px;
+  max-width:80%;
+  border-radius:40px;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.3);
+  background:#fff;
+  padding:12px;
+  animation:zoomIn 1.5s ease;
+}
+
+/* ANIMACIONES */
+@keyframes zoomIn{
+  from{transform:scale(0.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
+.modal-content h3{
+  text-align:center;
+  color:#8e44ad;
+  margin-bottom:18px;
+}
+.login-box{
+  background:#ffffffee;
+  padding:30px 25px;
+  border-radius:30px;
+  width:90%;
+  max-width:340px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+  animation:fadeIn .6s ease;
+}
+
+.login-icon{
+  font-size:3.5em;
+  margin-bottom:10px;
+}
+
+.login-box h2{
+  color:#8e44ad;
+  margin-bottom:20px;
+}
+
+.login-box input{
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+  background:#f4ecf7;
+  font-family:'Poppins';
+  font-weight:600;
+  color:#4b0082;
+}
+
+.login-box button{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  background:#8e44ad;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.login-box button:hover{
+  background:#6c3483;
+}
+
+.login-hint{
+  margin-top:12px;
+  font-size:.85em;
+  color:#6c3483;
+}
+
+.cerrar{
+  position:absolute;
+  right:25px;
+  top:18px;
+  font-size:1.6em;
+  cursor:pointer;
+  color:#8e44ad;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.stat{
+  background:linear-gradient(135deg,#f5eef8,#ffffff);
+  border-radius:18px;
+  padding:14px 10px;
+  text-align:center;
+  box-shadow:0 6px 15px rgba(0,0,0,.15);
+}
+
+.stat span{
+  display:block;
+  font-size:1.6em;
+  font-weight:700;
+  color:#8e44ad;
+  margin-bottom:6px;
+}
+
+.stat small{
+  font-size:.75em;
+  font-weight:600;
+  color:#6c3483;
+}
+
+@keyframes subir{
+  from{transform:translateY(30px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @keyframes abrirCandado{0%{transform:rotate(0deg);}50%{transform:rotate(25deg);}100%{transform:rotate(0deg);}}
+
+/* --------- RESPONSIVE MOVIL --------- */
+@media (max-width: 480px){
+
+  body{
+    padding:15px 12px 140px;
+  }
+
+  .app{
+    gap:20px;
+  }
+
+  /* Splash más pequeño */
+  #splash img{
+    width:160px;
+    border-radius:32px;
+  }
+
+  /* Login */
+  .login-box{
+    padding:25px 20px;
+    border-radius:24px;
+  }
+
+  .login-box h2{
+    font-size:1.3em;
+  }
+
+  /* Contador */
+  .contador{
+    padding:22px 15px;
+    border-radius:22px;
+  }
+
+  .contador span{
+    font-size:2.4em;
+  }
+
+  /* Grid superior */
+  .top-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* Secciones */
+  .section{
+    padding:18px;
+    border-radius:22px;
+  }
+
+  h3{
+    font-size:1.05em;
+  }
+
+  /* Juego */
+  #preguntaJuego{
+    font-size:.95em;
+  }
+
+  #opcionesJuego button{
+    padding:12px;
+    font-size:.9em;
+  }
+
+  /* Calendario */
+  .cal-grid div{
+    padding:8px;
+    font-size:.85em;
+  }
+
+  .nota-dia textarea{
+    height:70px;
+    font-size:.9em;
+  }
+
+  /* Modal estadísticas */
+  .modal-content{
+    padding:22px 18px;
+    border-radius:26px;
+  }
+
+  .modal-content h3{
+    font-size:1.1em;
+  }
+
+  .cerrar{
+    right:18px;
+    top:14px;
+    font-size:1.4em;
+  }
+
+  /* Navbar */
+  .nav{
+    padding:10px 0;
+  }
+
+  .nav a{
+    font-size:.75em;
+  }
+}
+/* ---- DIAS + ESTADISTICAS LADO A LADO EN MOVIL ---- */
+@media (max-width: 480px){
+
+  .top-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr; /* dos columnas */
+    gap:12px;
+  }
+
+  .contador,
+  .estadisticas{
+    padding:16px 12px;
+    border-radius:20px;
+  }
+
+  .contador span{
+    font-size:2em;
+  }
+
+  .contador h3,
+  .estadisticas h3{
+    font-size:.95em;
+  }
+
+  .estadisticas button{
+    padding:10px;
+    font-size:.8em;
+    border-radius:16px;
+  }
+}
+
 </style>
 </head>
 
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="icono.png" alt="Nesy App">
+</div>
 
 <!-- PANTALLA DE INGRESO -->
 <div class="ingreso-overlay" id="ingresoOverlay">
-  <div class="candado" id="candado">🔒</div>
-  <h2>Haz clic en el candado para ingresar 💜</h2>
-  <div class="input-pass" id="inputPass">
-    <div style="display:flex; gap:12px;">
-      <input type="text" maxlength="1" class="pin" id="pin1">
-      <input type="text" maxlength="1" class="pin" id="pin2">
-      <input type="text" maxlength="1" class="pin" id="pin3">
-      <input type="text" maxlength="1" class="pin" id="pin4">
-    </div>
-    <button onclick="verificarPin()" style="margin-top:15px;">Ingresar</button>
+  <div class="login-box">
+    <div class="login-icon">💜</div>
+    <h2>Iniciar sesión</h2>
+
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <button onclick="iniciarSesion()">Ingresar</button>
+
+    <p class="login-hint">Solo para alguien muy especial 💜</p>
   </div>
 </div>
+<!-- MODAL ESTADÍSTICAS -->
+<div class="modal-stats" id="modalStats">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModalStats()">×</span>
 
-<!-- AYUDANTE FLOTANTE -->
-<div class="ayudante" id="ayudante">
-  Hola Genesy 😄<br>No te sabes la contraseña, tranquila, yo te ayudo: es el día y el mes que empezaron a hablar 💜
+    <h3>💘 Estadísticas de tu noviecito</h3>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <span>100%</span>
+        <small>Interesado en ti</small>
+      </div>
+
+      <div class="stat">
+        <span>24/7</span>
+        <small>Pensando en ti</small>
+      </div>
+
+      <div class="stat">
+        <span id="statActividad">🏀</span>
+        <small>Qué estaba haciendo</small>
+      </div>
+    </div>
+  </div>
 </div>
-
 <!-- CONTENIDO APP -->
 <div class="app">
-<h1>💜 Christopher & Genesy 💜</h1>
-<h2>Tu app</h2>
 
-<!-- CONTADOR -->
-<div class="contador" style="text-align:center;">
-  <h3>Días que llevamos conociéndonos</h3>
-  <span id="dias">0</span>
+<!-- GRID SUPERIOR -->
+<div class="top-grid">
+
+  <div class="contador">
+    <h3>Días que llevamos conociéndonos</h3>
+    <span id="dias">0</span>
+  </div>
+
+  <div class="section estadisticas" onclick="abrirModalStats()" style="cursor:pointer;">
+    <h3>Estadísticas 💘</h3>
+    <p style="opacity:.8;">Toca para ver</p>
+  </div>
+
 </div>
+
 
 <!-- JUEGO -->
 <div class="section juego">
@@ -265,6 +672,32 @@ button:hover{background:#6c3483;}
 </div>
 <!-- ALERTA -->
 <div id="alertaJuego" class="alerta-juego"></div>
+<!-- CALENDARIO ESPECIAL -->
+<div class="section calendario">
+  <h3>📅 Calendario especial</h3>
+  <p style="text-align:center; font-weight:600; margin-bottom:10px;">
+    Este calendario es para que guardes tus momentos especiales con Chris 💜
+  </p>
+
+  <div class="cal-header">
+    <button onclick="cambiarMes(-1)">◀</button>
+    <span id="mesAnio"></span>
+    <button onclick="cambiarMes(1)">▶</button>
+  </div>
+
+  <div class="dias-semana">
+    <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
+    <span>Jue</span><span>Vie</span><span>Sáb</span>
+  </div>
+
+  <div class="cal-grid" id="calGrid"></div>
+
+  <div class="nota-dia" id="notaDia" style="display:none;">
+    <h4 id="fechaSeleccionada"></h4>
+    <textarea id="textoNota" placeholder="Escribe por qué este día es especial 💜"></textarea>
+    <button onclick="guardarNota()">Guardar nota</button>
+  </div>
+</div>
 
 <!-- NAV -->
 <div class="nav">
@@ -275,46 +708,44 @@ button:hover{background:#6c3483;}
 </div>
 
 <script>
-// -----------------------
-// INTERACTIVIDAD CANDADO
-// -----------------------
-const candado = document.getElementById("candado");
-const inputPass = document.getElementById("inputPass");
+function iniciarSesion(){
+  const user = document.getElementById("usuario").value.trim();
+  const pass = document.getElementById("password").value.trim();
 
-candado.addEventListener("click", ()=>{
-  inputPass.style.display="flex";
-  candado.style.animation="abrirCandado 0.6s forwards";
-});
+  if(user === "Genesy03" && pass === "1901"){
 
-// -----------------------
-// VERIFICAR PIN DE 4 CUADROS
-// -----------------------
-function verificarPin(){
-  const pin1 = document.getElementById("pin1").value;
-  const pin2 = document.getElementById("pin2").value;
-  const pin3 = document.getElementById("pin3").value;
-  const pin4 = document.getElementById("pin4").value;
-  const codigo = pin1 + pin2 + pin3 + pin4;
+    // guardar sesión
+    localStorage.setItem("sesionNesy", "activa");
+    localStorage.setItem("nombreNesy", "Genesy");
 
-  if(codigo === "1901"){
-    document.getElementById("ingresoOverlay").style.display="none";
-    document.querySelector(".app").style.display="flex";
-  } else {
-    const ayudante = document.getElementById("ayudante");
-    ayudante.style.display="block";
-    setTimeout(()=>{ayudante.style.display="none";},4000);
+    document.getElementById("ingresoOverlay").style.display = "none";
+    document.querySelector(".app").style.display = "flex";
+
+    // alerta bonita
+    setTimeout(()=>{
+      document.getElementById("alertaBienvenida").style.display = "flex";
+    },300);
+
+  }else{
+    alert("💔 Usuario o contraseña incorrectos");
   }
 }
 
+
 // -----------------------
-// CONTADOR
+// CONTADOR REAL 💜
+// Todo empezó el 19 de enero a las 9:30 PM
 // -----------------------
-const fechaInicio=new Date();
-fechaInicio.setDate(fechaInicio.getDate()-17);
+const fechaInicio = new Date(2026, 0, 19, 21, 30, 0);
+// año, mes (0 = enero), día, hora, minuto
+
 function actualizarDias(){
-  const h=new Date();
-  dias.innerText=Math.floor((h-fechaInicio)/(1000*60*60*24))+1;
+  const ahora = new Date();
+  const diferencia = ahora - fechaInicio;
+  const diasTotales = Math.floor(diferencia / (1000 * 60 * 60 * 24)) + 1;
+  document.getElementById("dias").innerText = diasTotales;
 }
+
 actualizarDias();
 
 // -----------------------
@@ -353,7 +784,106 @@ function mostrarPregunta(){
     opcionesJuego.appendChild(b);
   });
 }
+// ---------------- CALENDARIO ESPECIAL ----------------
+let fechaActual = new Date();
+let fechaSeleccionadaGlobal = null;
 
+function renderCalendario(){
+  const grid = document.getElementById("calGrid");
+  const mesAnio = document.getElementById("mesAnio");
+
+  if(!grid || !mesAnio) return;
+
+  grid.innerHTML = "";
+
+  const mes = fechaActual.getMonth();
+  const anio = fechaActual.getFullYear();
+
+  mesAnio.innerText = fechaActual.toLocaleDateString("es-ES",{
+    month:"long",
+    year:"numeric"
+  });
+
+  const primerDia = new Date(anio, mes, 1).getDay();
+  const totalDias = new Date(anio, mes + 1, 0).getDate();
+
+  // espacios vacíos
+  for(let i = 0; i < primerDia; i++){
+    grid.appendChild(document.createElement("div"));
+  }
+
+  // días del mes
+  for(let dia = 1; dia <= totalDias; dia++){
+    const celda = document.createElement("div");
+    celda.innerText = dia;
+
+    const clave = `nota-${anio}-${mes}-${dia}`;
+
+    if(localStorage.getItem(clave)){
+      celda.classList.add("marcado");
+    }
+
+    celda.onclick = () => seleccionarDia(dia);
+    grid.appendChild(celda);
+  }
+}
+
+// cambiar mes
+function cambiarMes(valor){
+  fechaActual.setMonth(fechaActual.getMonth() + valor);
+  renderCalendario();
+}
+
+// seleccionar día
+function seleccionarDia(dia){
+  const mes = fechaActual.getMonth();
+  const anio = fechaActual.getFullYear();
+  fechaSeleccionadaGlobal = `nota-${anio}-${mes}-${dia}`;
+
+  const nota = localStorage.getItem(fechaSeleccionadaGlobal);
+
+  document.getElementById("notaDia").style.display = "block";
+  document.getElementById("fechaSeleccionada").innerText =
+    `💜 ${dia}/${mes + 1}/${anio}`;
+
+  const textarea = document.getElementById("textoNota");
+  const boton = document.querySelector(".nota-dia button");
+
+  if(nota){
+    textarea.value = nota;
+    textarea.readOnly = true;
+    textarea.style.background = "#eee";
+    boton.style.display = "none";
+  } else {
+    textarea.value = "";
+    textarea.readOnly = false;
+    textarea.style.background = "#fff";
+    boton.style.display = "block";
+  }
+}
+
+// guardar nota (bloqueo definitivo)
+function guardarNota(){
+  const textarea = document.getElementById("textoNota");
+  const texto = textarea.value.trim();
+
+  if(texto === ""){
+    alert("💜 Escribe algo bonito antes de guardar 💜");
+    return;
+  }
+
+  localStorage.setItem(fechaSeleccionadaGlobal, texto);
+
+  textarea.readOnly = true;
+  textarea.style.background = "#eee";
+  document.querySelector(".nota-dia button").style.display = "none";
+
+  renderCalendario();
+  alert("💜 Este recuerdo quedó guardado para siempre 💜");
+}
+
+// inicializar
+renderCalendario();
 function responderPregunta(correcto){
   alertaJuego.className = "alerta-juego " + (correcto?"correcto":"incorrecto");
   alertaJuego.innerText = correcto?"✨ Muy bien ✨":"💫 Intenta otra vez";
@@ -373,7 +903,37 @@ function responderPregunta(correcto){
 
 // Mostrar la primera pregunta
 mostrarPregunta()
+// -------- MODAL ESTADÍSTICAS --------
+function abrirModalStats(){
+  document.getElementById("modalStats").style.display="flex";
+}
 
+function cerrarModalStats(){
+  document.getElementById("modalStats").style.display="none";
+}
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+  }, 3500);
+};
+// -------- ACTIVIDAD DEL NOVIECITO --------
+const actividades = [
+  "🏀 Jugando baloncesto",
+  "💼 Trabajando",
+  "🧹 Limpiando la casa",
+  "🎧 Escuchando música",
+  "😴 Descansando",
+  "💜 Pensando en ti"
+];
+
+const actividadSpan = document.getElementById("statActividad");
+
+function cambiarActividad(){
+  const random = Math.floor(Math.random() * actividades.length);
+  actividadSpan.textContent = actividades[random];
+}
+
+cambiarActividad();
 // -----------------------
 // CARTITA
 // -----------------------
@@ -388,7 +948,49 @@ const mensajes = [
 function mostrarCartita(){
   mensajeCartita.innerText=mensajes[new Date().getDate()%mensajes.length];
 }
+
+window.addEventListener("load", ()=>{
+  const sesion = localStorage.getItem("sesionNesy");
+
+  if(sesion === "activa"){
+    document.getElementById("ingresoOverlay").style.display = "none";
+    document.querySelector(".app").style.display = "flex";
+  }
+});
+function cerrarBienvenida(){
+  document.getElementById("alertaBienvenida").style.display = "none";
+}
+
 </script>
+<div id="alertaBienvenida" style="
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:5000;
+">
+  <div style="
+    background:#fff;
+    padding:30px 25px;
+    border-radius:28px;
+    max-width:360px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    animation:subir .4s ease;
+  ">
+    <h2 style="color:#8e44ad;">Hola Genesy 💜</h2>
+    <p style="margin:15px 0; font-weight:600;">
+      Bienvenida a <b>Nesy</b><br>
+      una app creada especialmente para ti ✨
+    </p>
+    <button onclick="cerrarBienvenida()">Entrar</button>
+  </div>
+</div>
 
 </body>
 </html>
