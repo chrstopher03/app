@@ -223,6 +223,48 @@ button:hover{background:#6c3483;}
   resize:none;
 }
 
+/* ====== BARRA INFERIOR FIJA ABAJO ====== */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #8e44ad;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.bottomNav .navItem {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  transition: 0.3s;
+}
+.bottomNav .navItem.active,
+.bottomNav .navItem:hover {
+  color: #fff;
+}
+.bottomNav .navItem .icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom: 2px;
+}
+.icon{
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom:4px;
+}
 /* RESPONSIVE MOVIL */
 @media (max-width:480px){
   body{padding:18px 18px 140px;}
@@ -301,13 +343,31 @@ button:hover{background:#6c3483;}
 
 </div>
 
-<!-- NAV -->
-<div class="nav">
-  <a href="index.html">🏠<br>Inicio</a>
-  <a href="album.html">📖<br>Álbum</a>
-  <a href="musica.html">🎵<br>Música</a>
-  <a href="#">💜<br>Ánimo</a>
-</div>
+<nav class="bottomNav">
+  <!-- Inicio -->
+  <a href="index.html" class="navItem active">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M3 12l9-9 9 9v9a2 2 0 0 1-2 2h-4v-6H9v6H5a2 2 0 0 1-2-2z"/>
+    </svg>
+    <small>Inicio</small>
+  </a>
+
+  <!-- Álbum -->
+  <a href="album.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm6 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
+    </svg>
+    <small>Álbum</small>
+  </a>
+
+  <!-- Música -->
+  <a href="musica.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+    </svg>
+    <small>Música</small>
+  </a>
+</nav>
 
 <script>
 /* CONTADORES */
