@@ -16,8 +16,26 @@ body{
   background: linear-gradient(135deg,#f0e7f8,#ffffff);
   color: #4b0082;
   min-height: 100vh;
-  padding: 20px 20px 160px;
+  padding: 80px 20px 160px; /* Ajuste por header fijo */
   overflow-x: hidden;
+}
+
+/* HEADER */
+header{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#ffffffee;
+  padding:18px 0;
+  text-align:center;
+  font-size:1.5em;
+  font-weight:700;
+  color:#8e44ad;
+  box-shadow:0 4px 15px rgba(0,0,0,0.12);
+  z-index:100;
+  border-bottom-left-radius:12px;
+  border-bottom-right-radius:12px;
 }
 
 /* APP */
@@ -47,28 +65,11 @@ body{
   text-align:center;
   transition:.3s;
 }
-.contador:hover{
-  transform: translateY(-5px);
-}
-.contador h3{
-  font-weight:600;
-  font-size:1.1em;
-}
-.contador span{
-  display:block;
-  font-size:2.8em;
-  font-weight:700;
-  color:#8e44ad;
-  margin-top:10px;
-}
-
-/* CUMPLEAÑOS */
-#cumpleContador{
-  background: linear-gradient(135deg,#fdf6ff,#f5eef8);
-}
-#cumpleContador span{
-  font-size:1.8em;
-}
+.contador:hover{transform: translateY(-5px);}
+.contador h3{font-weight:600; font-size:1.1em;}
+.contador span{display:block;font-size:2.8em;font-weight:700;color:#8e44ad;margin-top:10px;}
+#cumpleContador{background: linear-gradient(135deg,#fdf6ff,#f5eef8);}
+#cumpleContador span{font-size:1.8em;}
 
 /* SECCIONES */
 .section{
@@ -80,148 +81,17 @@ body{
 h1,h2,h3{text-align:center; font-weight:600;}
 
 /* JUEGO */
-.juego{
-  background:linear-gradient(135deg,#8e44ad,#6c3483);
-  color:#fff;
-}
-#preguntaJuego{
-  background: rgba(255,255,255,0.2);
-  padding:14px;
-  border-radius:14px;
-  margin:15px 0;
-  text-align:center;
-  font-weight:600;
-}
-#opcionesJuego{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-#opcionesJuego button{
-  background:white;
-  color:#4b0082;
-  border:none;
-  border-radius:14px;
-  padding:14px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
-}
-#opcionesJuego button:hover{
-  background:#f4ecf7;
-  transform:scale(1.05);
-}
-#resultadoJuego{
-  margin-top:15px;
-  font-weight:600;
-  text-align:center;
-}
+.juego{background:linear-gradient(135deg,#8e44ad,#6c3483); color:#fff;}
+#preguntaJuego{background: rgba(255,255,255,0.2); padding:14px; border-radius:14px; margin:15px 0; text-align:center; font-weight:600;}
+#opcionesJuego{display:flex; flex-direction:column; gap:12px;}
+#opcionesJuego button{background:white; color:#4b0082; border:none; border-radius:14px; padding:14px; font-weight:600; cursor:pointer; transition:.25s;}
+#opcionesJuego button:hover{background:#f4ecf7; transform:scale(1.05);}
+#resultadoJuego{margin-top:15px; font-weight:600; text-align:center;}
 
 /* BOTONES */
-button{
-  background:#8e44ad;
-  color:#fff;
-  border:none;
-  padding:14px;
-  border-radius:14px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
-}
+button{background:#8e44ad;color:#fff;border:none;padding:14px;border-radius:14px;font-weight:600;cursor:pointer;transition:.25s;}
 button:hover{background:#6c3483;}
-
-/* BOTONES CENTRADOS */
-.btn-centro{
-  display:block;
-  margin:15px auto;
-}
-
-/* NAV */
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:12px 0;
-  box-shadow:0 -6px 20px rgba(0,0,0,.12);
-  border-top-left-radius:18px;
-  border-top-right-radius:18px;
-}
-.nav a{
-  text-decoration:none;
-  color:#8e44ad;
-  font-weight:600;
-  text-align:center;
-  font-size:.85em;
-}
-
-/* CALENDARIO */
-.cal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-.cal-header button{
-  padding:6px 12px;
-  border-radius:10px;
-  background:#8e44ad;
-  color:#fff;
-  border:none;
-}
-.cal-header button:hover{
-  background:#6c3483;
-}
-.dias-semana{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  font-weight:600;
-  margin-bottom:5px;
-  text-align:center;
-  color:#4b0082;
-}
-.cal-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
-}
-.cal-grid div{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:40px;
-  border-radius:12px;
-  background:#ffffffcc;
-  cursor:pointer;
-  font-weight:600;
-  transition:.2s;
-}
-.cal-grid div:hover{
-  background:#f3e6fc;
-  transform:scale(1.05);
-}
-.cal-grid div.marcado{
-  background:#8e44ad;
-  color:#fff;
-}
-
-.nota-dia{
-  margin-top:15px;
-  text-align:center;
-}
-.nota-dia textarea{
-  width:100%;
-  height:80px;
-  border-radius:12px;
-  padding:10px;
-  border:none;
-  font-family:'Poppins';
-  margin-bottom:10px;
-  resize:none;
-}
+.btn-centro{display:block;margin:15px auto;}
 
 /* ====== BARRA INFERIOR FIJA ABAJO ====== */
 .bottomNav {
@@ -229,7 +99,7 @@ button:hover{background:#6c3483;}
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #8e44ad;
+  background: #6c3483;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -265,9 +135,37 @@ button:hover{background:#6c3483;}
   fill: currentColor;
   margin-bottom:4px;
 }
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
+}
+.nav a{text-decoration:none;color:#8e44ad;font-weight:600;text-align:center;font-size:.85em;}
+
+/* CALENDARIO */
+.cal-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+.cal-header button{padding:6px 12px;border-radius:10px;background:#8e44ad;color:#fff;border:none;}
+.cal-header button:hover{background:#6c3483;}
+.dias-semana{display:grid; grid-template-columns:repeat(7,1fr); font-weight:600; margin-bottom:5px; text-align:center; color:#4b0082;}
+.cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+.cal-grid div{display:flex; align-items:center; justify-content:center; min-height:40px; border-radius:12px; background:#ffffffcc; cursor:pointer; font-weight:600; transition:.2s;}
+.cal-grid div:hover{background:#f3e6fc; transform:scale(1.05);}
+.cal-grid div.marcado{background:#8e44ad;color:#fff;}
+.nota-dia{margin-top:15px;text-align:center;}
+.nota-dia textarea{width:100%;height:80px;border-radius:12px;padding:10px;border:none;font-family:'Poppins';margin-bottom:10px;resize:none;}
+
 /* RESPONSIVE MOVIL */
 @media (max-width:480px){
-  body{padding:18px 18px 140px;}
+  body{padding:100px 18px 140px;} /* más espacio por header fijo */
   .app{padding:0 6px; gap:20px;}
   .top-grid{grid-template-columns:1fr 1fr; gap:10px;}
   .contador{padding:18px 14px; border-radius:22px;}
@@ -281,6 +179,9 @@ button:hover{background:#6c3483;}
 </style>
 </head>
 <body>
+
+<!-- HEADER -->
+<header>Genesy</header>
 
 <div class="app">
 
@@ -368,36 +269,30 @@ button:hover{background:#6c3483;}
     <small>Música</small>
   </a>
 </nav>
-
 <script>
 /* CONTADORES */
 const fechaInicio = new Date(2026, 0, 19, 21, 30, 0);
 const fechaMesInicio = new Date(2026, 2, 20);
-
 function actualizarDias(){
   const ahora = new Date();
   const dias = Math.floor((ahora - fechaInicio) / (1000*60*60*24)) +1;
   document.getElementById("dias").innerText = dias;
 }
-
 function actualizarMeses(){
   const ahora = new Date();
   let meses=(ahora.getFullYear()-fechaMesInicio.getFullYear())*12+(ahora.getMonth()-fechaMesInicio.getMonth());
   if(ahora.getDate()<fechaMesInicio.getDate()) meses--;
   if(meses<0) meses=0;
   document.getElementById("meses").innerText = meses;
-
   let proximo=new Date(ahora.getFullYear(), ahora.getMonth(), 20);
   if(ahora.getDate()>=20) proximo=new Date(ahora.getFullYear(), ahora.getMonth()+1,20);
   const diasFaltan=Math.ceil((proximo-ahora)/(1000*60*60*24));
   document.getElementById("cuentaMes").innerText=diasFaltan+" días";
 }
-
 function actualizarCumple(){
   const ahora=new Date();
   let cumple=new Date(ahora.getFullYear(),7,22);
   if(ahora>cumple) cumple=new Date(ahora.getFullYear()+1,7,22);
-
   const diferencia=cumple-ahora;
   const dias=Math.floor(diferencia/(1000*60*60*24));
   const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
@@ -405,12 +300,7 @@ function actualizarCumple(){
   const segundos=Math.floor((diferencia%(1000*60))/1000);
   document.getElementById("cuentaCumple").innerText=`${dias} días ${horas} h ${minutos} m ${segundos} s`;
 }
-
-function actualizarContadores(){
-  actualizarDias();
-  actualizarMeses();
-  actualizarCumple();
-}
+function actualizarContadores(){ actualizarDias(); actualizarMeses(); actualizarCumple();}
 actualizarContadores();
 setInterval(actualizarContadores,1000);
 
@@ -447,28 +337,18 @@ cargarPregunta();
 
 /* CARTITA */
 const mensajes=["💜 Me gustas más cada día","💜 Gracias por estar conmigo","💜 Eres la niña más especial"];
-function mostrarCartita(){
-  mensajeCartita.innerText=mensajes[Math.floor(Math.random()*mensajes.length)];
-}
+function mostrarCartita(){mensajeCartita.innerText=mensajes[Math.floor(Math.random()*mensajes.length)];}
 
 /* CALENDARIO */
-let fechaActual=new Date();
-let fechaSeleccionadaGlobal=null;
-
+let fechaActual=new Date(); let fechaSeleccionadaGlobal=null;
 function renderCalendario(){
-  const grid=document.getElementById("calGrid");
-  const mesAnio=document.getElementById("mesAnio");
+  const grid=document.getElementById("calGrid"); const mesAnio=document.getElementById("mesAnio");
   grid.innerHTML="";
-
-  const mes=fechaActual.getMonth();
-  const anio=fechaActual.getFullYear();
+  const mes=fechaActual.getMonth(); const anio=fechaActual.getFullYear();
   mesAnio.innerText=fechaActual.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
-
   const primerDia=new Date(anio,mes,1).getDay();
   const totalDias=new Date(anio,mes+1,0).getDate();
-
   for(let i=0;i<primerDia;i++){ grid.appendChild(document.createElement("div")); }
-
   for(let dia=1;dia<=totalDias;dia++){
     const celda=document.createElement("div");
     celda.innerText=dia;
@@ -494,7 +374,7 @@ function guardarNota(){
   alert("💜 Recuerdo guardado");
 }
 renderCalendario();
-
 </script>
+
 </body>
 </html>
