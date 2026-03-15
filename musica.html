@@ -6,65 +6,87 @@
 <title>Música - Christopher & Genesy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-* {box-sizing:border-box;margin:0;padding:0;font-family:Poppins;}
-body{
-  background:linear-gradient(135deg,#8e44ad,#ffffff);
+* { box-sizing:border-box; margin:0; padding:0; font-family:Poppins; }
+
+body {
+  background: linear-gradient(135deg,#f5eef8,#ffffff);
   color:#4b0082;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   min-height:100vh;
-  padding:20px;
+  padding:80px 20px 140px; /* espacio para header y nav */
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  flex-direction:column;
+}
+
+/* HEADER */
+header{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#ffffffee;
+  padding:18px 0;
+  text-align:center;
+  font-size:1.5em;
+  font-weight:700;
+  color:#8e44ad;
+  box-shadow:0 4px 15px rgba(0,0,0,0.12);
+  z-index:100;
+  border-bottom-left-radius:12px;
+  border-bottom-right-radius:12px;
 }
 
 /* TITULO */
 h1{
   margin-bottom:25px;
-  color:#ffffff;
+  color:#6c3483;
   text-align:center;
   font-size:1.8em;
+  font-weight:700;
+  text-shadow:1px 1px 5px rgba(0,0,0,0.1);
 }
 
 /* CONTENEDOR DE CANCIONES */
 .albumMusical{
   display:flex;
-  flex-direction: column;
-  align-items: center;
-  gap:30px;
+  flex-direction:column;
+  align-items:center;
+  gap:25px;
   width:100%;
-  max-width:500px;
-  padding-bottom: 100px; /* espacio extra para que la última canción no quede pegada al nav */
-  overflow-y: auto; /* permite scroll si hay muchas canciones */
+  max-width:520px;
+  padding-bottom:120px;
 }
 
 /* CANCION */
 .cancion{
   display:flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction:column;
+  align-items:center;
   background:#ffffffcc;
-  border: 2px solid #8e44ad;
   border-radius:25px;
   padding:20px;
   width:100%;
-  box-shadow: 0 12px 25px rgba(142,68,173,0.2);
-  transition: transform .3s, box-shadow .3s;
+  box-shadow:0 12px 25px rgba(142,68,173,0.15);
+  border:2px solid #8e44ad;
+  transition: transform .3s, box-shadow .3s, background .3s;
 }
 .cancion:hover{
-  transform: scale(1.05);
-  box-shadow: 0 20px 35px rgba(142,68,173,0.35);
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 20px 40px rgba(142,68,173,0.35);
+  background:#fdf4fd;
 }
 
 /* DISCO GIRATORIO */
 .disco{
-  width:140px;
-  height:140px;
+  width:150px;
+  height:150px;
   border-radius:50%;
   overflow:hidden;
   margin-bottom:15px;
-  border: 5px solid #8e44ad;
-  box-shadow: 0 8px 25px rgba(142,68,173,0.35);
-  animation: girar 6s linear infinite;
+  border:5px solid #8e44ad;
+  box-shadow:0 10px 30px rgba(142,68,173,0.35);
+  animation: girar 8s linear infinite;
 }
 .disco img{
   width:100%;
@@ -80,10 +102,11 @@ h1{
 /* NOMBRE DE LA CANCION */
 .cancion h3{
   color:#6c3483;
-  font-size:1.2em;
+  font-size:1.25em;
   margin-bottom:12px;
   text-align:center;
   font-weight:600;
+  text-shadow:0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* REPRODUCTOR */
@@ -92,7 +115,7 @@ audio{
   outline:none;
   border-radius:12px;
   margin-top:10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* ANIMACION DISCO */
@@ -100,6 +123,65 @@ audio{
   0%{transform:rotate(0deg);}
   100%{transform:rotate(360deg);}
 }
+
+
+/* ====== BARRA INFERIOR FIJA ABAJO ====== */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #6c3483;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.bottomNav .navItem {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  transition: 0.3s;
+}
+.bottomNav .navItem.active,
+.bottomNav .navItem:hover {
+  color: #fff;
+}
+.bottomNav .navItem .icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom: 2px;
+}
+.icon{
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom:4px;
+}
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
+}
+.nav a{text-decoration:none;color:#8e44ad;font-weight:600;text-align:center;font-size:.85em;}
 
 /* NAV */
 .nav{
@@ -127,30 +209,58 @@ audio{
   color:#6c3483;
   transform: scale(1.1);
 }
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  body{padding:100px 15px 140px;}
+  .cancion{padding:15px;}
+  .disco{width:120px;height:120px;border-width:4px;}
+  .cancion h3{font-size:1.1em;}
+}
 </style>
 </head>
 <body>
 
-<h1>🎵 Álbum de Música</h1>
+<header>Genesy</header>
+
 
 <div class="albumMusical" id="albumMusical">
-  <!-- Las canciones se insertarán aquí con JS -->
+  <!-- Canciones generadas con JS -->
 </div>
 
-<!-- NAV -->
-<div class="nav">
-  <a href="index.html">🏠<br>Inicio</a>
-  <a href="album.html">📖<br>Álbum</a>
-  <a href="musica.html">🎵<br>Música</a>
-  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
-</div>
+
+<nav class="bottomNav">
+  <!-- Inicio -->
+  <a href="index.html" class="navItem active">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M3 12l9-9 9 9v9a2 2 0 0 1-2 2h-4v-6H9v6H5a2 2 0 0 1-2-2z"/>
+    </svg>
+    <small>Inicio</small>
+  </a>
+
+  <!-- Álbum -->
+  <a href="album.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm6 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
+    </svg>
+    <small>Álbum</small>
+  </a>
+
+  <!-- Música -->
+  <a href="musica.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+    </svg>
+    <small>Música</small>
+  </a>
+</nav>
+
 <script>
 // Álbum de canciones
 const canciones = [
-  {titulo:"halley's comet-billie eilish ", img:"01.jpg", audio:"cancion1.mp3"},
-  {titulo:"My One And Only Love- Mon laferte", img:"02.jpg", audio:"cancion2.mp3"},
+  {titulo:"Halley's Comet - Billie Eilish", img:"01.jpg", audio:"cancion1.mp3"},
+  {titulo:"My One And Only Love - Mon Laferte", img:"02.jpg", audio:"cancion2.mp3"},
   {titulo:"Los Gemelos De Sinaloa - AMOR", img:"03.jpg", audio:"cancion3.mp3"},
-  
 ];
 
 const contenedor = document.getElementById("albumMusical");

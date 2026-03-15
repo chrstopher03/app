@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Álbum de Genesy</title>
+<title>Álbum de Nesy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -10,13 +10,31 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:Poppins;}
 
 body{
-  background:linear-gradient(135deg,#8e44ad,#ffffff);
+  background: linear-gradient(135deg, #f5eef8, #ffffff);
   color: #4b0082;
+  min-height: 100vh;
+  padding: 80px 20px 140px; /* espacio para header y nav */
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  align-items: flex-start;
+}
+
+/* HEADER */
+header{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#ffffffee;
+  padding:18px 0;
+  text-align:center;
+  font-size:1.5em;
+  font-weight:700;
+  color:#8e44ad;
+  box-shadow:0 4px 15px rgba(0,0,0,0.12);
+  z-index:100;
+  border-bottom-left-radius:12px;
+  border-bottom-right-radius:12px;
 }
 
 /* CONTENEDOR APP */
@@ -26,14 +44,16 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 /* TITULO */
 h1{
   text-align: center;
-  margin-bottom: 20px;
   font-weight: 700;
+  font-size: 1.6em;
   color: #6c3483;
+  margin-bottom: 15px;
 }
 
 /* LIBRO */
@@ -43,14 +63,18 @@ h1{
   max-width: 420px;
   background: #ffffff;
   border-radius: 25px;
-  box-shadow: 0 20px 50px rgba(142,68,173,0.35),
-              inset 0 0 0 1px rgba(142,68,173,0.15);
+  box-shadow: 0 20px 50px rgba(142,68,173,0.25),
+              inset 0 0 0 1px rgba(142,68,173,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  transition: 0.3s;
   border: 3px solid #8e44ad;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.libro:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(142,68,173,0.35);
 }
 
 /* FOTO */
@@ -58,18 +82,23 @@ h1{
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(142,68,173,0.35);
+  box-shadow: 0 15px 35px rgba(142,68,173,0.25);
   margin-bottom: 15px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.foto:hover{
+  transform: scale(1.02);
+  box-shadow: 0 25px 50px rgba(142,68,173,0.4);
 }
 .foto img{
   width: 100%;
   height: auto;
-  object-fit: contain;
-  transition: transform .3s ease;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 .foto:hover img{
   transform: scale(1.05);
@@ -78,12 +107,14 @@ h1{
 /* TEXTO */
 .texto{
   text-align: center;
-  font-size: 1em;
-  opacity: 0.85;
-  line-height: 1.5;
+  font-size: 1.05em;
   color: #6c3483;
+  opacity: 0.9;
+  line-height: 1.5;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
+.texto:hover{color: #8e44ad;}
 
 /* CONTROLES */
 .controles{
@@ -91,22 +122,24 @@ h1{
   justify-content: space-between;
   width: 100%;
   max-width: 420px;
-  margin: 20px 0; /* margen arriba y abajo para separarlo */
+  margin: 10px 0 30px;
 }
 .controles button{
-  background: linear-gradient(135deg, #8e44ad, #6c3483);
+  background: linear-gradient(135deg,#8e44ad,#6c3483);
   color: #fff;
   border: none;
   padding: 14px 24px;
   border-radius: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.25s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 10px 20px rgba(142,68,173,0.35);
 }
 .controles button:hover{
   transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 25px rgba(142,68,173,0.45);
 }
+
 /* NAV */
 .nav{
   position: fixed;
@@ -128,6 +161,64 @@ h1{
   font-size: .85em;
 }
 
+/* ====== BARRA INFERIOR FIJA ABAJO ====== */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #6c3483;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.bottomNav .navItem {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  transition: 0.3s;
+}
+.bottomNav .navItem.active,
+.bottomNav .navItem:hover {
+  color: #fff;
+}
+.bottomNav .navItem .icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom: 2px;
+}
+.icon{
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom:4px;
+}
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
+}
+.nav a{text-decoration:none;color:#8e44ad;font-weight:600;text-align:center;font-size:.85em;}
+
 /* MODAL ZOOM */
 .modal{
   display: none;
@@ -137,40 +228,52 @@ h1{
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.9);
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease;
 }
 .modal img{
   max-width: 90%;
   max-height: 90%;
   border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(142,68,173,0.5);
+  box-shadow: 0 20px 50px rgba(142,68,173,0.6);
   transition: transform 0.3s ease;
+}
+.modal img:hover{
+  transform: scale(1.02);
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  body{padding:100px 15px 140px;}
+  .libro{padding:15px;}
+  .foto{border-radius:16px;}
+  .controles button{padding:12px 20px; font-size:.9em;}
+  .texto{font-size:.95em;}
 }
 </style>
 </head>
 
 <body>
 
+<header>Nesy</header>
+
 <div class="app">
+  <h1>📖 Nuestro Álbum</h1>
 
-<h1>📖 Nuestro Álbum</h1>
-
-<div class="libro">
-  <div class="foto" id="fotoZoom">
-    <img id="imagen" src="04.jpeg" alt="Foto">
+  <div class="libro">
+    <div class="foto" id="fotoZoom">
+      <img id="imagen" src="04.jpeg" alt="Foto">
+    </div>
+    <div class="texto" id="descripcion">
+      Nuestro primer recuerdo 💜
+    </div>
   </div>
-  <div class="texto" id="descripcion">
-    Nuestro primer recuerdo 💜
-  </div>
-</div>
 
-<div class="controles">
-  <button onclick="anterior()">⬅ Anterior</button>
-  <button onclick="siguiente()">Siguiente ➡</button>
-</div>
+  <div class="controles">
+    <button onclick="anterior()">⬅ Anterior</button>
+    <button onclick="siguiente()">Siguiente ➡</button>
+  </div>
 
 </div>
 
@@ -179,22 +282,39 @@ h1{
   <img id="imagenModal" src="" alt="Zoom">
 </div>
 
-<!-- NAV -->
-<div class="nav">
-  <a href="index.html">🏠<br>Inicio</a>
-  <a href="album.html">📖<br>Álbum</a>
-  <a href="musica.html">🎵<br>Música</a>
-  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
-</div>
+<nav class="bottomNav">
+  <!-- Inicio -->
+  <a href="index.html" class="navItem active">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M3 12l9-9 9 9v9a2 2 0 0 1-2 2h-4v-6H9v6H5a2 2 0 0 1-2-2z"/>
+    </svg>
+    <small>Inicio</small>
+  </a>
 
+  <!-- Álbum -->
+  <a href="album.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm6 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
+    </svg>
+    <small>Álbum</small>
+  </a>
+
+  <!-- Música -->
+  <a href="musica.html" class="navItem">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+    </svg>
+    <small>Música</small>
+  </a>
+</nav>
 <script>
 // Álbum
 const album = [
   {img:"06.jpeg", text:"Vea mi niña yo de pequeño💜"},
-  {img:"05.jpeg", text:" Esta foto me gustaa"},
-  {img:"07.jpeg", text:"Ella es la mas lindita, mi preciosa, mi esposita estoy enamorado de ella 🌸😍"},
+  {img:"05.jpeg", text:"Esta foto me gustaa"},
+  {img:"07.jpeg", text:"Ella es la más lindita, mi preciosa, mi esposita, estoy enamorado de ella 🌸😍"},
   {img:"09.jpeg", text:"JAJAJAJAJ"},
-  {img:"10.jpeg", text:"cuando cree mi marca jaja"},
+  {img:"10.jpeg", text:"Cuando creé mi marca jaja"},
   {img:"04.jpeg", text:"Esa no me gusta sjsjs"}
 ];
 
@@ -204,7 +324,6 @@ let actual = 0;
 function mostrar(){
   const img = document.getElementById("imagen");
   const desc = document.getElementById("descripcion");
-
   img.src = album[actual].img;
   desc.innerText = album[actual].text;
 }
@@ -233,9 +352,7 @@ fotoZoom.addEventListener("click", ()=>{
   setTimeout(()=>{imagenModal.style.transform = "scale(1)";},50);
 });
 
-modal.addEventListener("click", ()=>{
-  modal.style.display = "none";
-});
+modal.addEventListener("click", ()=>{modal.style.display = "none";});
 
 // Swipe táctil (móviles)
 let touchstartX = 0;
