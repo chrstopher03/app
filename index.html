@@ -9,605 +9,432 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#8e44ad,#ffffff);
-color:#4b0082;
-min-height:100vh;
-padding:20px 20px 160px;
-overflow-x:hidden;
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#f0e7f8,#ffffff);
+  color: #4b0082;
+  min-height: 100vh;
+  padding: 20px 20px 160px;
+  overflow-x: hidden;
 }
 
 /* APP */
-
 .app{
-max-width:430px;
-width:100%;
-margin:0 auto;
-display:flex;
-flex-direction:column;
-gap:25px;
-padding:0 5px;
+  max-width:430px;
+  width:100%;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  padding:0 5px;
 }
 
 /* GRID */
-
 .top-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
 }
 
 /* CONTADORES */
-
 .contador{
-background:linear-gradient(135deg,#ffffff,#f5eef8);
-padding:28px 20px;
-border-radius:28px;
-box-shadow:0 15px 30px rgba(0,0,0,.25);
-text-align:center;
-transition:.3s;
+  background: linear-gradient(135deg,#ffffff,#f5eef8);
+  padding:28px 20px;
+  border-radius:28px;
+  box-shadow:0 15px 30px rgba(0,0,0,.12);
+  text-align:center;
+  transition:.3s;
 }
-
 .contador:hover{
-transform:translateY(-5px);
+  transform: translateY(-5px);
+}
+.contador h3{
+  font-weight:600;
+  font-size:1.1em;
+}
+.contador span{
+  display:block;
+  font-size:2.8em;
+  font-weight:700;
+  color:#8e44ad;
+  margin-top:10px;
 }
 
-.contador span{
-display:block;
-font-size:2.8em;
-font-weight:700;
-color:#8e44ad;
-margin-top:10px;
+/* CUMPLEAÑOS */
+#cumpleContador{
+  background: linear-gradient(135deg,#fdf6ff,#f5eef8);
+}
+#cumpleContador span{
+  font-size:1.8em;
 }
 
 /* SECCIONES */
-
 .section{
-background:#ffffffdd;
-border-radius:25px;
-padding:22px;
-box-shadow:0 8px 15px rgba(0,0,0,.15);
+  background:#ffffffdd;
+  border-radius:25px;
+  padding:22px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
-
-h1,h2,h3{text-align:center}
+h1,h2,h3{text-align:center; font-weight:600;}
 
 /* JUEGO */
-
 .juego{
-background:linear-gradient(135deg,#8e44ad,#6c3483);
-color:#fff;
+  background:linear-gradient(135deg,#8e44ad,#6c3483);
+  color:#fff;
 }
-
 #preguntaJuego{
-background:rgba(255,255,255,.18);
-padding:14px;
-border-radius:14px;
-margin:15px 0;
-text-align:center;
-font-weight:600;
+  background: rgba(255,255,255,0.2);
+  padding:14px;
+  border-radius:14px;
+  margin:15px 0;
+  text-align:center;
+  font-weight:600;
 }
-
 #opcionesJuego{
-display:flex;
-flex-direction:column;
-gap:12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
-
 #opcionesJuego button{
-background:white;
-color:#4b0082;
-border:none;
-border-radius:14px;
-padding:14px;
-font-weight:600;
-cursor:pointer;
-transition:.25s;
+  background:white;
+  color:#4b0082;
+  border:none;
+  border-radius:14px;
+  padding:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
 }
-
 #opcionesJuego button:hover{
-background:#f4ecf7;
-transform:scale(1.03);
+  background:#f4ecf7;
+  transform:scale(1.05);
 }
-
 #resultadoJuego{
-margin-top:15px;
-font-weight:600;
-text-align:center;
+  margin-top:15px;
+  font-weight:600;
+  text-align:center;
 }
 
 /* BOTONES */
-
 button{
-background:#8e44ad;
-color:#fff;
-border:none;
-padding:14px;
-border-radius:14px;
-font-weight:600;
-cursor:pointer;
+  background:#8e44ad;
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
 }
-
-button:hover{background:#6c3483}
+button:hover{background:#6c3483;}
 
 /* BOTONES CENTRADOS */
-
 .btn-centro{
-display:block;
-margin:15px auto;
+  display:block;
+  margin:15px auto;
 }
 
 /* NAV */
-
 .nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:12px 0;
-box-shadow:0 -6px 20px rgba(0,0,0,.25);
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
 }
-
 .nav a{
-text-decoration:none;
-color:#8e44ad;
-font-weight:600;
-text-align:center;
-font-size:.85em;
+  text-decoration:none;
+  color:#8e44ad;
+  font-weight:600;
+  text-align:center;
+  font-size:.85em;
 }
 
 /* CALENDARIO */
-
 .cal-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
 }
-
 .cal-header button{
-padding:6px 12px;
-border-radius:10px;
+  padding:6px 12px;
+  border-radius:10px;
+  background:#8e44ad;
+  color:#fff;
+  border:none;
 }
-
+.cal-header button:hover{
+  background:#6c3483;
+}
 .dias-semana{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-font-weight:600;
-margin-bottom:5px;
-text-align:center;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  font-weight:600;
+  margin-bottom:5px;
+  text-align:center;
+  color:#4b0082;
 }
-
 .cal-grid{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:6px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
 }
-
 .cal-grid div{
-display:flex;
-align-items:center;
-justify-content:center;
-min-height:40px;
-border-radius:12px;
-background:#ffffffcc;
-cursor:pointer;
-font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  border-radius:12px;
+  background:#ffffffcc;
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
 }
-
+.cal-grid div:hover{
+  background:#f3e6fc;
+  transform:scale(1.05);
+}
 .cal-grid div.marcado{
-background:#8e44ad;
-color:#fff;
+  background:#8e44ad;
+  color:#fff;
 }
 
 .nota-dia{
-margin-top:15px;
-text-align:center;
+  margin-top:15px;
+  text-align:center;
 }
-
 .nota-dia textarea{
-width:100%;
-height:80px;
-border-radius:12px;
-padding:10px;
-border:none;
-font-family:'Poppins';
-margin-bottom:10px;
-}
-/* Estilo compacto para el contador de cumpleaños */
-#cumpleContador {
-  background: linear-gradient(135deg, #f5eef8, #ffffff);
-  padding: 20px 15px;
-  border-radius: 22px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  text-align: center;
-  transition: .3s;
+  width:100%;
+  height:80px;
+  border-radius:12px;
+  padding:10px;
+  border:none;
+  font-family:'Poppins';
+  margin-bottom:10px;
+  resize:none;
 }
 
-#cumpleContador:hover {
-  transform: translateY(-3px);
-}
-
-#cumpleContador span {
-  display: block;
-  font-size: 1.8em;
-  font-weight: 600;
-  color: #8e44ad;
-  margin-top: 8px;
-}
 /* RESPONSIVE MOVIL */
 @media (max-width:480px){
-
-body{
-padding:18px 18px 140px;
+  body{padding:18px 18px 140px;}
+  .app{padding:0 6px; gap:20px;}
+  .top-grid{grid-template-columns:1fr 1fr; gap:10px;}
+  .contador{padding:18px 14px; border-radius:22px;}
+  .contador span{font-size:2em;}
+  .section{padding:18px;}
+  .cal-grid{gap:5px;}
+  .cal-grid div{padding:8px; font-size:.85em; min-height:38px;}
+  .nota-dia textarea{height:70px; font-size:.9em;}
+  button{padding:12px; font-size:.9em;}
 }
-
-.app{
-padding:0 6px;
-gap:20px;
-}
-
-.top-grid{
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.contador{
-padding:18px 14px;
-border-radius:22px;
-}
-
-.contador span{
-font-size:2em;
-}
-
-.section{
-padding:18px;
-}
-
-.cal-grid{
-gap:5px;
-}
-
-.cal-grid div{
-padding:8px;
-font-size:.85em;
-min-height:38px;
-}
-
-.nota-dia textarea{
-height:70px;
-font-size:.9em;
-}
-
-button{
-padding:12px;
-font-size:.9em;
-}
-
-}
-
 </style>
 </head>
-
 <body>
 
 <div class="app">
 
-<div class="top-grid">
+  <!-- CONTADORES -->
+  <div class="top-grid">
+    <div class="contador">
+      <h3>Tiempo de Conocernos</h3>
+      <span id="dias">0</span>
+    </div>
+    <div class="contador">
+      <h3>Meses juntos</h3>
+      <span id="meses">0</span>
+    </div>
+  </div>
 
-<div class="contador">
-<h3>Tiempo de Conocernos</h3>
-<span id="dias">0</span>
-</div>
+  <div class="contador">
+    <h3>Faltan para el próximo mes 💜</h3>
+    <span id="cuentaMes">0</span>
+  </div>
 
-<div class="contador">
-<h3>Meses juntos</h3>
-<span id="meses">0</span>
-</div>
+  <div class="contador" id="cumpleContador">
+    <h3>🎂 Faltan para tu cumpleaños</h3>
+    <span id="cuentaCumple">0 días</span>
+  </div>
 
-</div>
+  <!-- QUIZ -->
+  <div class="section juego">
+    <h3>⚡ Quiz de Jujutsu Kaisen</h3>
+    <p id="preguntaJuego"></p>
+    <div id="opcionesJuego"></div>
+    <div id="resultadoJuego"></div>
+  </div>
 
-<div class="contador">
-<h3>Faltan para el próximo mes 💜</h3>
-<span id="cuentaMes">0</span>
-</div>
+  <!-- CARTITA -->
+  <div class="section">
+    <h3>¿Qué piensa Christopher hoy?</h3>
+    <button onclick="mostrarCartita()" class="btn-centro">Ver mensaje</button>
+    <p id="mensajeCartita" style="margin-top:15px;text-align:center"></p>
+  </div>
 
-<div class="contador" id="cumpleContador">
-  <h3>🎂 Faltan para tu cumpleaños</h3>
-  <span id="cuentaCumple">0 días</span>
-</div>
-
-<div class="section juego">
-
-<h3>⚡ Quiz de Jujutsu Kaisen</h3>
-
-<p id="preguntaJuego"></p>
-
-<div id="opcionesJuego"></div>
-
-<div id="resultadoJuego"></div>
-
-</div>
-
-<div class="section">
-
-<h3>¿Qué piensa Christopher hoy?</h3>
-
-<button onclick="mostrarCartita()" class="btn-centro">Ver mensaje</button>
-
-<p id="mensajeCartita" style="margin-top:15px;text-align:center"></p>
-
-</div>
-
-<!-- CALENDARIO -->
-
-<div class="section calendario">
-
-<h3>📅 Calendario especial</h3>
-
-<div class="cal-header">
-<button onclick="cambiarMes(-1)">◀</button>
-<span id="mesAnio"></span>
-<button onclick="cambiarMes(1)">▶</button>
-</div>
-
-<div class="dias-semana">
-<span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
-<span>Jue</span><span>Vie</span><span>Sáb</span>
-</div>
-
-<div class="cal-grid" id="calGrid"></div>
-
-<div class="nota-dia" id="notaDia" style="display:none;">
-<h4 id="fechaSeleccionada"></h4>
-<textarea id="textoNota" placeholder="Escribe por qué este día es especial 💜"></textarea>
-<button onclick="guardarNota()" class="btn-centro">Guardar nota</button>
-</div>
+  <!-- CALENDARIO -->
+  <div class="section calendario">
+    <h3>📅 Calendario especial</h3>
+    <div class="cal-header">
+      <button onclick="cambiarMes(-1)">◀</button>
+      <span id="mesAnio"></span>
+      <button onclick="cambiarMes(1)">▶</button>
+    </div>
+    <div class="dias-semana">
+      <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
+      <span>Jue</span><span>Vie</span><span>Sáb</span>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="nota-dia" id="notaDia" style="display:none;">
+      <h4 id="fechaSeleccionada"></h4>
+      <textarea id="textoNota" placeholder="Escribe por qué este día es especial 💜"></textarea>
+      <button onclick="guardarNota()" class="btn-centro">Guardar nota</button>
+    </div>
+  </div>
 
 </div>
 
-</div>
-
+<!-- NAV -->
 <div class="nav">
-<a href="#">🏠<br>Inicio</a>
-<a href="#">📖<br>Álbum</a>
-<a href="#">🎵<br>Música</a>
-<a href="#">💜<br>Ánimo</a>
+  <a href="index.html">🏠<br>Inicio</a>
+  <a href="album.html">📖<br>Álbum</a>
+  <a href="musica.html">🎵<br>Música</a>
+  <a href="#">💜<br>Ánimo</a>
 </div>
 
-<script>/* CONTADORES */
-
-// Fecha de inicio de relación
+<script>
+/* CONTADORES */
 const fechaInicio = new Date(2026, 0, 19, 21, 30, 0);
 const fechaMesInicio = new Date(2026, 2, 20);
 
-// Contador de días desde el inicio de la relación
-function actualizarDias() {
+function actualizarDias(){
   const ahora = new Date();
-  const dias = Math.floor((ahora - fechaInicio) / (1000 * 60 * 60 * 24)) + 1;
+  const dias = Math.floor((ahora - fechaInicio) / (1000*60*60*24)) +1;
   document.getElementById("dias").innerText = dias;
 }
 
-// Contador de meses juntos y días para el próximo mes
-function actualizarMeses() {
+function actualizarMeses(){
   const ahora = new Date();
-  let meses =
-    (ahora.getFullYear() - fechaMesInicio.getFullYear()) * 12 +
-    (ahora.getMonth() - fechaMesInicio.getMonth());
-  if (ahora.getDate() < fechaMesInicio.getDate()) meses--;
-  if (meses < 0) meses = 0;
+  let meses=(ahora.getFullYear()-fechaMesInicio.getFullYear())*12+(ahora.getMonth()-fechaMesInicio.getMonth());
+  if(ahora.getDate()<fechaMesInicio.getDate()) meses--;
+  if(meses<0) meses=0;
   document.getElementById("meses").innerText = meses;
 
-  let proximo = new Date(ahora.getFullYear(), ahora.getMonth(), 20);
-  if (ahora.getDate() >= 20) {
-    proximo = new Date(ahora.getFullYear(), ahora.getMonth() + 1, 20);
-  }
-  const diasFaltan = Math.ceil((proximo - ahora) / (1000 * 60 * 60 * 24));
-  document.getElementById("cuentaMes").innerText = diasFaltan + " días";
+  let proximo=new Date(ahora.getFullYear(), ahora.getMonth(), 20);
+  if(ahora.getDate()>=20) proximo=new Date(ahora.getFullYear(), ahora.getMonth()+1,20);
+  const diasFaltan=Math.ceil((proximo-ahora)/(1000*60*60*24));
+  document.getElementById("cuentaMes").innerText=diasFaltan+" días";
 }
 
-// Contador de cumpleaños en tiempo real
-function actualizarCumple() {
-  const ahora = new Date();
-  // 22 de agosto -> mes 7, día 22
-  let cumple = new Date(ahora.getFullYear(), 7, 22);
+function actualizarCumple(){
+  const ahora=new Date();
+  let cumple=new Date(ahora.getFullYear(),7,22);
+  if(ahora>cumple) cumple=new Date(ahora.getFullYear()+1,7,22);
 
-  if (ahora > cumple) {
-    cumple = new Date(ahora.getFullYear() + 1, 7, 22);
-  }
-
-  const diferencia = cumple - ahora;
-
-  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-  document.getElementById("cuentaCumple").innerText =
-    `${dias} días ${horas} h ${minutos} m ${segundos} s`;
+  const diferencia=cumple-ahora;
+  const dias=Math.floor(diferencia/(1000*60*60*24));
+  const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
+  const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
+  const segundos=Math.floor((diferencia%(1000*60))/1000);
+  document.getElementById("cuentaCumple").innerText=`${dias} días ${horas} h ${minutos} m ${segundos} s`;
 }
 
-// Función que actualiza todos los contadores
-function actualizarContadores() {
+function actualizarContadores(){
   actualizarDias();
   actualizarMeses();
   actualizarCumple();
 }
-
-// Ejecutar al cargar
 actualizarContadores();
+setInterval(actualizarContadores,1000);
 
-// Actualizar cada segundo
-setInterval(actualizarContadores, 1000);
 /* QUIZ */
-
 const preguntas=[
 {p:"¿Quién es el protagonista?",o:["Yuji Itadori","Gojo","Megumi"],c:"Yuji Itadori"},
 {p:"¿Quién es el hechicero más fuerte?",o:["Gojo","Nanami","Megumi"],c:"Gojo"},
 {p:"¿Qué demonio vive en Yuji?",o:["Sukuna","Mahito","Jogo"],c:"Sukuna"},
-{p:"¿Quién usa las sombras?",o:["Megumi","Gojo","Todo"],c:"Megumi"}
-]
-
-let actual=0
-let puntos=0
-
+{p:"Quién usa las sombras?",o:["Megumi","Gojo","Todo"],c:"Megumi"}
+];
+let actual=0; let puntos=0;
 function cargarPregunta(){
-
-const q=preguntas[actual]
-
-preguntaJuego.innerText=q.p
-
-opcionesJuego.innerHTML=""
-
-q.o.forEach(op=>{
-
-const btn=document.createElement("button")
-
-btn.innerText=op
-
-btn.onclick=()=>{
-
-if(op==q.c){
-puntos++
+  const q=preguntas[actual];
+  preguntaJuego.innerText=q.p;
+  opcionesJuego.innerHTML="";
+  q.o.forEach(op=>{
+    const btn=document.createElement("button");
+    btn.innerText=op;
+    btn.onclick=()=>{
+      if(op==q.c) puntos++;
+      actual++;
+      if(actual<preguntas.length) cargarPregunta();
+      else terminarJuego();
+    }
+    opcionesJuego.appendChild(btn);
+  });
 }
-
-actual++
-
-if(actual<preguntas.length){
-cargarPregunta()
-}else{
-terminarJuego()
-}
-
-}
-
-opcionesJuego.appendChild(btn)
-
-})
-
-}
-
 function terminarJuego(){
-
-preguntaJuego.innerText="🔥 Terminaste el quiz"
-
-opcionesJuego.innerHTML=""
-
-resultadoJuego.innerText="Tu puntaje: "+puntos+" / "+preguntas.length
-
+  preguntaJuego.innerText="🔥 Terminaste el quiz";
+  opcionesJuego.innerHTML="";
+  resultadoJuego.innerText="Tu puntaje: "+puntos+" / "+preguntas.length;
 }
-
-cargarPregunta()
+cargarPregunta();
 
 /* CARTITA */
-
-const mensajes=[
-"💜 Me gustas más cada día",
-"💜 Gracias por estar conmigo",
-"💜 Eres la niña más especial"
-]
-
+const mensajes=["💜 Me gustas más cada día","💜 Gracias por estar conmigo","💜 Eres la niña más especial"];
 function mostrarCartita(){
-
-mensajeCartita.innerText=mensajes[Math.floor(Math.random()*mensajes.length)]
-
+  mensajeCartita.innerText=mensajes[Math.floor(Math.random()*mensajes.length)];
 }
 
 /* CALENDARIO */
-
-let fechaActual=new Date()
-let fechaSeleccionadaGlobal=null
+let fechaActual=new Date();
+let fechaSeleccionadaGlobal=null;
 
 function renderCalendario(){
+  const grid=document.getElementById("calGrid");
+  const mesAnio=document.getElementById("mesAnio");
+  grid.innerHTML="";
 
-const grid=document.getElementById("calGrid")
-const mesAnio=document.getElementById("mesAnio")
+  const mes=fechaActual.getMonth();
+  const anio=fechaActual.getFullYear();
+  mesAnio.innerText=fechaActual.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
 
-grid.innerHTML=""
+  const primerDia=new Date(anio,mes,1).getDay();
+  const totalDias=new Date(anio,mes+1,0).getDate();
 
-const mes=fechaActual.getMonth()
-const anio=fechaActual.getFullYear()
+  for(let i=0;i<primerDia;i++){ grid.appendChild(document.createElement("div")); }
 
-mesAnio.innerText=fechaActual.toLocaleDateString("es-ES",{month:"long",year:"numeric"})
-
-const primerDia=new Date(anio,mes,1).getDay()
-const totalDias=new Date(anio,mes+1,0).getDate()
-
-for(let i=0;i<primerDia;i++){
-grid.appendChild(document.createElement("div"))
+  for(let dia=1;dia<=totalDias;dia++){
+    const celda=document.createElement("div");
+    celda.innerText=dia;
+    const clave=`nota-${anio}-${mes}-${dia}`;
+    if(localStorage.getItem(clave)) celda.classList.add("marcado");
+    celda.onclick=()=>seleccionarDia(dia);
+    grid.appendChild(celda);
+  }
 }
-
-for(let dia=1;dia<=totalDias;dia++){
-
-const celda=document.createElement("div")
-celda.innerText=dia
-
-const clave=`nota-${anio}-${mes}-${dia}`
-
-if(localStorage.getItem(clave)){
-celda.classList.add("marcado")
-}
-
-celda.onclick=()=>seleccionarDia(dia)
-
-grid.appendChild(celda)
-
-}
-
-}
-
-function cambiarMes(valor){
-
-fechaActual.setMonth(fechaActual.getMonth()+valor)
-renderCalendario()
-
-}
-
+function cambiarMes(valor){ fechaActual.setMonth(fechaActual.getMonth()+valor); renderCalendario(); }
 function seleccionarDia(dia){
-
-const mes=fechaActual.getMonth()
-const anio=fechaActual.getFullYear()
-
-fechaSeleccionadaGlobal=`nota-${anio}-${mes}-${dia}`
-
-const nota=localStorage.getItem(fechaSeleccionadaGlobal)
-
-document.getElementById("notaDia").style.display="block"
-
-document.getElementById("fechaSeleccionada").innerText=`💜 ${dia}/${mes+1}/${anio}`
-
-const textarea=document.getElementById("textoNota")
-
-if(nota){
-textarea.value=nota
-}else{
-textarea.value=""
+  const mes=fechaActual.getMonth(); const anio=fechaActual.getFullYear();
+  fechaSeleccionadaGlobal=`nota-${anio}-${mes}-${dia}`;
+  const nota=localStorage.getItem(fechaSeleccionadaGlobal);
+  document.getElementById("notaDia").style.display="block";
+  document.getElementById("fechaSeleccionada").innerText=`💜 ${dia}/${mes+1}/${anio}`;
+  document.getElementById("textoNota").value = nota || "";
 }
-
-}
-
 function guardarNota(){
-
-const texto=document.getElementById("textoNota").value
-
-localStorage.setItem(fechaSeleccionadaGlobal,texto)
-
-renderCalendario()
-
-alert("💜 Recuerdo guardado")
-
+  const texto=document.getElementById("textoNota").value;
+  localStorage.setItem(fechaSeleccionadaGlobal,texto);
+  renderCalendario();
+  alert("💜 Recuerdo guardado");
 }
-
-renderCalendario()
+renderCalendario();
 
 </script>
-
 </body>
 </html>
