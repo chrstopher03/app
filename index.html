@@ -4,993 +4,610 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nesy</title>
-    <link rel="icon" href="icono.png">
+<link rel="icon" href="icono.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#8e44ad,#ffffff);
-  color:#4b0082;
-  min-height:100vh;
-  padding:20px 15px 160px; /* ⬅ MÁS ESPACIO ABAJO */
-  overflow-x:hidden;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#8e44ad,#ffffff);
+color:#4b0082;
+min-height:100vh;
+padding:20px 20px 160px;
+overflow-x:hidden;
 }
 
+/* APP */
 
-/* ----------------- PANTALLA DE INGRESO ----------------- */
-.ingreso-overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:linear-gradient(135deg,#8e44ad,#ffffff);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
-  gap:20px;
-}
-.candado{
-  font-size:6em;
-  color:#6c3483;
-  cursor:pointer;
-  transition:.3s;
-}
-.candado:hover{
-  transform:scale(1.2);
-}
-.input-pass{
-  display:none;
-  margin-top:15px;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
-.pin{
-  width:50px;
-  height:50px;
-  text-align:center;
-  font-size:1.5em;
-  border-radius:12px;
-  border:none;
-  outline:none;
-  background:#ffffffcc;
-  color:#4b0082;
-  font-weight:700;
-}
-.input-pass button{
-  background:#6c3483;
-  color:#fff;
-  border:none;
-  padding:12px 25px;
-  border-radius:12px;
-  font-weight:600;
-  cursor:pointer;
-}
-.input-pass button:hover{background:#4b0082;}
-
-/* ----------------- AYUDANTE FLOTANTE ----------------- */
-.ayudante{
-  position:fixed;
-  bottom:120px;
-  right:20px;
-  background:#ffffffcc;
-  color:#4b0082;
-  padding:15px 20px;
-  border-radius:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,.2);
-  font-weight:600;
-  display:none;
-  max-width:220px;
-  text-align:center;
-  animation:fadeIn 0.5s ease forwards;
-}
-
-/* ----------------- APP ----------------- */
 .app{
-  max-width:430px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  display:none; /* oculto hasta ingresar */
+max-width:430px;
+width:100%;
+margin:0 auto;
+display:flex;
+flex-direction:column;
+gap:25px;
+padding:0 5px;
 }
-/* GRID SUPERIOR */
+
+/* GRID */
+
 .top-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
 }
 
-/* TARJETA ESTADÍSTICAS */
-.estadisticas{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+/* CONTADORES */
 
-/* CANDADO PRO */
-.candado{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  background:radial-gradient(circle at top,#ffffff,#e6d4f2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:3.5em;
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
-}
-
-h1,h2,h3{text-align:center;}
-
-/* CONTADOR */
 .contador{
-  background:#ffffffcc;
-  padding:28px 20px;
-  border-radius:28px;
-  box-shadow:0 12px 20px rgba(0,0,0,.2);
+background:linear-gradient(135deg,#ffffff,#f5eef8);
+padding:28px 20px;
+border-radius:28px;
+box-shadow:0 15px 30px rgba(0,0,0,.25);
+text-align:center;
+transition:.3s;
 }
+
+.contador:hover{
+transform:translateY(-5px);
+}
+
 .contador span{
-  display:block;
-  font-size:3em;
-  font-weight:700;
-  color:#8e44ad;
-  margin-top:10px;
+display:block;
+font-size:2.8em;
+font-weight:700;
+color:#8e44ad;
+margin-top:10px;
 }
 
 /* SECCIONES */
+
 .section{
-  background:#ffffffdd;
-  border-radius:25px;
-  padding:22px;
-  box-shadow:0 8px 15px rgba(0,0,0,.15);
+background:#ffffffdd;
+border-radius:25px;
+padding:22px;
+box-shadow:0 8px 15px rgba(0,0,0,.15);
 }
 
-/* JUEGO PRO */
+h1,h2,h3{text-align:center}
+
+/* JUEGO */
+
 .juego{
-  background:linear-gradient(135deg,#8e44ad,#6c3483);
-  color:#fff;
+background:linear-gradient(135deg,#8e44ad,#6c3483);
+color:#fff;
 }
+
 #preguntaJuego{
-  background:rgba(255,255,255,.18);
-  padding:14px;
-  border-radius:14px;
-  margin:15px 0;
-  text-align:center;
-  font-weight:600;
+background:rgba(255,255,255,.18);
+padding:14px;
+border-radius:14px;
+margin:15px 0;
+text-align:center;
+font-weight:600;
 }
+
 #opcionesJuego{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
+
 #opcionesJuego button{
-  background:white;
-  color:#4b0082;
-  border:none;
-  border-radius:14px;
-  padding:14px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
+background:white;
+color:#4b0082;
+border:none;
+border-radius:14px;
+padding:14px;
+font-weight:600;
+cursor:pointer;
+transition:.25s;
 }
+
 #opcionesJuego button:hover{
-  background:#f4ecf7;
-  transform:scale(1.03);
+background:#f4ecf7;
+transform:scale(1.03);
+}
+
+#resultadoJuego{
+margin-top:15px;
+font-weight:600;
+text-align:center;
 }
 
 /* BOTONES */
-button{
-  background:#8e44ad;
-  color:#fff;
-  border:none;
-  padding:14px;
-  border-radius:14px;
-  font-weight:600;
-  cursor:pointer;
-}
-button:hover{background:#6c3483;}
 
-/* CARTITA */
-.mensaje-cartita{
-  margin-top:15px;
-  text-align:center;
-  min-height:45px;
+button{
+background:#8e44ad;
+color:#fff;
+border:none;
+padding:14px;
+border-radius:14px;
+font-weight:600;
+cursor:pointer;
 }
-/* -------- CALENDARIO -------- */
-.calendario{
-  text-align:center;
+
+button:hover{background:#6c3483}
+
+/* BOTONES CENTRADOS */
+
+.btn-centro{
+display:block;
+margin:15px auto;
 }
+
+/* NAV */
+
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:0 -6px 20px rgba(0,0,0,.25);
+}
+
+.nav a{
+text-decoration:none;
+color:#8e44ad;
+font-weight:600;
+text-align:center;
+font-size:.85em;
+}
+
+/* CALENDARIO */
 
 .cal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
 }
 
 .cal-header button{
-  background:#8e44ad;
-  border:none;
-  color:#fff;
-  padding:6px 12px;
-  border-radius:10px;
+padding:6px 12px;
+border-radius:10px;
 }
 
 .dias-semana{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  font-weight:600;
-  margin-bottom:5px;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+font-weight:600;
+margin-bottom:5px;
+text-align:center;
 }
 
 .cal-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
 }
 
 .cal-grid div{
-  padding:10px;
-  border-radius:12px;
-  background:#ffffffcc;
-  cursor:pointer;
-  font-weight:600;
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:40px;
+border-radius:12px;
+background:#ffffffcc;
+cursor:pointer;
+font-weight:600;
 }
 
 .cal-grid div.marcado{
-  background:#8e44ad;
-  color:#fff;
+background:#8e44ad;
+color:#fff;
 }
 
 .nota-dia{
-  margin-top:15px;
+margin-top:15px;
+text-align:center;
 }
 
 .nota-dia textarea{
-  width:100%;
-  height:80px;
-  border-radius:12px;
-  padding:10px;
-  border:none;
-  font-family:'Poppins';
+width:100%;
+height:80px;
+border-radius:12px;
+padding:10px;
+border:none;
+font-family:'Poppins';
+margin-bottom:10px;
+}
+/* Estilo compacto para el contador de cumpleaños */
+#cumpleContador {
+  background: linear-gradient(135deg, #f5eef8, #ffffff);
+  padding: 20px 15px;
+  border-radius: 22px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: .3s;
 }
 
-/* ALERTA */
-.alerta-juego{
-  position:fixed;
-  top:20%;
-  left:50%;
-  transform:translateX(-50%);
-  padding:18px 26px;
-  border-radius:22px;
-  color:#fff;
-  font-weight:600;
-  display:none;
-  z-index:1000;
-}
-.alerta-juego.correcto{background:#27ae60;}
-.alerta-juego.incorrecto{background:#c0392b;}
-
-/* NAV BAR */
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:12px 0;
-  box-shadow:0 -6px 20px rgba(0,0,0,.25);
-}
-.nav a{
-  text-decoration:none;
-  color:#8e44ad;
-  font-weight:600;
-  text-align:center;
-  font-size:.85em;
-}
-.modal-stats{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:3000;
-  animation:fadeIn .3s ease;
+#cumpleContador:hover {
+  transform: translateY(-3px);
 }
 
-.modal-content{
-  background:#fff;
-  width:90%;
-  max-width:380px;
-  border-radius:30px;
-  padding:25px;
-  box-shadow:0 15px 40px rgba(0,0,0,.35);
-  animation:subir .35s ease;
+#cumpleContador span {
+  display: block;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #8e44ad;
+  margin-top: 8px;
+}
+/* RESPONSIVE MOVIL */
+@media (max-width:480px){
+
+body{
+padding:18px 18px 140px;
 }
 
-/* SPLASH SCREEN */
-#splash{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#8e44ad,#f5eef8);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  animation:fadeOut 1s ease forwards;
-  animation-delay:2.5s;
+.app{
+padding:0 6px;
+gap:20px;
 }
 
-#splash img{
-  width:200px;
-  max-width:80%;
-  border-radius:40px;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.35),
-    inset 0 0 0 1px rgba(255,255,255,0.3);
-  background:#fff;
-  padding:12px;
-  animation:zoomIn 1.5s ease;
+.top-grid{
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
-/* ANIMACIONES */
-@keyframes zoomIn{
-  from{transform:scale(0.7);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+.contador{
+padding:18px 14px;
+border-radius:22px;
 }
 
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden;}
-}
-.modal-content h3{
-  text-align:center;
-  color:#8e44ad;
-  margin-bottom:18px;
-}
-.login-box{
-  background:#ffffffee;
-  padding:30px 25px;
-  border-radius:30px;
-  width:90%;
-  max-width:340px;
-  text-align:center;
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
-  animation:fadeIn .6s ease;
+.contador span{
+font-size:2em;
 }
 
-.login-icon{
-  font-size:3.5em;
-  margin-bottom:10px;
+.section{
+padding:18px;
 }
 
-.login-box h2{
-  color:#8e44ad;
-  margin-bottom:20px;
+.cal-grid{
+gap:5px;
 }
 
-.login-box input{
-  width:100%;
-  padding:14px;
-  margin-bottom:14px;
-  border-radius:14px;
-  border:none;
-  outline:none;
-  background:#f4ecf7;
-  font-family:'Poppins';
-  font-weight:600;
-  color:#4b0082;
+.cal-grid div{
+padding:8px;
+font-size:.85em;
+min-height:38px;
 }
 
-.login-box button{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:none;
-  background:#8e44ad;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
+.nota-dia textarea{
+height:70px;
+font-size:.9em;
 }
 
-.login-box button:hover{
-  background:#6c3483;
+button{
+padding:12px;
+font-size:.9em;
 }
 
-.login-hint{
-  margin-top:12px;
-  font-size:.85em;
-  color:#6c3483;
-}
-
-.cerrar{
-  position:absolute;
-  right:25px;
-  top:18px;
-  font-size:1.6em;
-  cursor:pointer;
-  color:#8e44ad;
-}
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:18px;
-}
-
-.stat{
-  background:linear-gradient(135deg,#f5eef8,#ffffff);
-  border-radius:18px;
-  padding:14px 10px;
-  text-align:center;
-  box-shadow:0 6px 15px rgba(0,0,0,.15);
-}
-
-.stat span{
-  display:block;
-  font-size:1.6em;
-  font-weight:700;
-  color:#8e44ad;
-  margin-bottom:6px;
-}
-
-.stat small{
-  font-size:.75em;
-  font-weight:600;
-  color:#6c3483;
-}
-
-@keyframes subir{
-  from{transform:translateY(30px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
-}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-@keyframes abrirCandado{0%{transform:rotate(0deg);}50%{transform:rotate(25deg);}100%{transform:rotate(0deg);}}
-
-/* --------- RESPONSIVE MOVIL --------- */
-@media (max-width: 480px){
-
-  body{
-    padding:15px 12px 140px;
-  }
-
-  .app{
-    gap:20px;
-  }
-
-  /* Splash más pequeño */
-  #splash img{
-    width:160px;
-    border-radius:32px;
-  }
-
-  /* Login */
-  .login-box{
-    padding:25px 20px;
-    border-radius:24px;
-  }
-
-  .login-box h2{
-    font-size:1.3em;
-  }
-
-  /* Contador */
-  .contador{
-    padding:22px 15px;
-    border-radius:22px;
-  }
-
-  .contador span{
-    font-size:2.4em;
-  }
-
-  /* Grid superior */
-  .top-grid{
-    grid-template-columns:1fr;
-  }
-
-  /* Secciones */
-  .section{
-    padding:18px;
-    border-radius:22px;
-  }
-
-  h3{
-    font-size:1.05em;
-  }
-
-  /* Juego */
-  #preguntaJuego{
-    font-size:.95em;
-  }
-
-  #opcionesJuego button{
-    padding:12px;
-    font-size:.9em;
-  }
-
-  /* Calendario */
-  .cal-grid div{
-    padding:8px;
-    font-size:.85em;
-  }
-
-  .nota-dia textarea{
-    height:70px;
-    font-size:.9em;
-  }
-
-  /* Modal estadísticas */
-  .modal-content{
-    padding:22px 18px;
-    border-radius:26px;
-  }
-
-  .modal-content h3{
-    font-size:1.1em;
-  }
-
-  .cerrar{
-    right:18px;
-    top:14px;
-    font-size:1.4em;
-  }
-
-  /* Navbar */
-  .nav{
-    padding:10px 0;
-  }
-
-  .nav a{
-    font-size:.75em;
-  }
-}
-/* ---- DIAS + ESTADISTICAS LADO A LADO EN MOVIL ---- */
-@media (max-width: 480px){
-
-  .top-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr; /* dos columnas */
-    gap:12px;
-  }
-
-  .contador,
-  .estadisticas{
-    padding:16px 12px;
-    border-radius:20px;
-  }
-
-  .contador span{
-    font-size:2em;
-  }
-
-  .contador h3,
-  .estadisticas h3{
-    font-size:.95em;
-  }
-
-  .estadisticas button{
-    padding:10px;
-    font-size:.8em;
-    border-radius:16px;
-  }
 }
 
 </style>
 </head>
 
 <body>
-<!-- SPLASH SCREEN -->
-<div id="splash">
-  <img src="icono.png" alt="Nesy App">
-</div>
 
-<!-- PANTALLA DE INGRESO -->
-<div class="ingreso-overlay" id="ingresoOverlay">
-  <div class="login-box">
-    <div class="login-icon">💜</div>
-    <h2>Iniciar sesión</h2>
-
-    <input type="text" id="usuario" placeholder="Usuario">
-    <input type="password" id="password" placeholder="Contraseña">
-
-    <button onclick="iniciarSesion()">Ingresar</button>
-
-    <p class="login-hint">Solo para alguien muy especial 💜</p>
-  </div>
-</div>
-<!-- MODAL ESTADÍSTICAS -->
-<div class="modal-stats" id="modalStats">
-  <div class="modal-content">
-    <span class="cerrar" onclick="cerrarModalStats()">×</span>
-
-    <h3>💘 Estadísticas de tu noviecito</h3>
-
-    <div class="stats-grid">
-      <div class="stat">
-        <span>100%</span>
-        <small>Interesado en ti</small>
-      </div>
-
-      <div class="stat">
-        <span>24/7</span>
-        <small>Pensando en ti</small>
-      </div>
-
-      <div class="stat">
-        <span id="statActividad">🏀</span>
-        <small>Qué estaba haciendo</small>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- CONTENIDO APP -->
 <div class="app">
 
-<!-- GRID SUPERIOR -->
 <div class="top-grid">
 
-  <div class="contador">
-    <h3>Días que llevamos conociéndonos</h3>
-    <span id="dias">0</span>
-  </div>
+<div class="contador">
+<h3>Tiempo de Conocernos</h3>
+<span id="dias">0</span>
+</div>
 
-  <div class="section estadisticas" onclick="abrirModalStats()" style="cursor:pointer;">
-    <h3>Estadísticas 💘</h3>
-    <p style="opacity:.8;">Toca para ver</p>
-  </div>
+<div class="contador">
+<h3>Meses juntos</h3>
+<span id="meses">0</span>
+</div>
 
 </div>
 
+<div class="contador">
+<h3>Faltan para el próximo mes 💜</h3>
+<span id="cuentaMes">0</span>
+</div>
 
-<!-- JUEGO -->
+<div class="contador" id="cumpleContador">
+  <h3>🎂 Faltan para tu cumpleaños</h3>
+  <span id="cuentaCumple">0 días</span>
+</div>
+
 <div class="section juego">
-  <h3>⚡ Juego mágico del día</h3>
-  <p id="preguntaJuego"></p>
-  <div id="opcionesJuego"></div>
+
+<h3>⚡ Quiz de Jujutsu Kaisen</h3>
+
+<p id="preguntaJuego"></p>
+
+<div id="opcionesJuego"></div>
+
+<div id="resultadoJuego"></div>
+
 </div>
 
-<!-- CARTITA -->
 <div class="section">
-  <h3>¿Quieres saber qué piensa de ti Christopher hoy?</h3>
-  <button onclick="mostrarCartita()" style="display:block; margin:0 auto;">Ver mensaje</button>
-  <p class="mensaje-cartita" id="mensajeCartita">✨ Aquí aparecerá tu mensaje ✨</p>
+
+<h3>¿Qué piensa Christopher hoy?</h3>
+
+<button onclick="mostrarCartita()" class="btn-centro">Ver mensaje</button>
+
+<p id="mensajeCartita" style="margin-top:15px;text-align:center"></p>
+
 </div>
-<!-- ALERTA -->
-<div id="alertaJuego" class="alerta-juego"></div>
-<!-- CALENDARIO ESPECIAL -->
+
+<!-- CALENDARIO -->
+
 <div class="section calendario">
-  <h3>📅 Calendario especial</h3>
-  <p style="text-align:center; font-weight:600; margin-bottom:10px;">
-    Este calendario es para que guardes tus momentos especiales con Chris 💜
-  </p>
 
-  <div class="cal-header">
-    <button onclick="cambiarMes(-1)">◀</button>
-    <span id="mesAnio"></span>
-    <button onclick="cambiarMes(1)">▶</button>
-  </div>
+<h3>📅 Calendario especial</h3>
 
-  <div class="dias-semana">
-    <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
-    <span>Jue</span><span>Vie</span><span>Sáb</span>
-  </div>
-
-  <div class="cal-grid" id="calGrid"></div>
-
-  <div class="nota-dia" id="notaDia" style="display:none;">
-    <h4 id="fechaSeleccionada"></h4>
-    <textarea id="textoNota" placeholder="Escribe por qué este día es especial 💜"></textarea>
-    <button onclick="guardarNota()">Guardar nota</button>
-  </div>
+<div class="cal-header">
+<button onclick="cambiarMes(-1)">◀</button>
+<span id="mesAnio"></span>
+<button onclick="cambiarMes(1)">▶</button>
 </div>
 
-<!-- NAV -->
+<div class="dias-semana">
+<span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
+<span>Jue</span><span>Vie</span><span>Sáb</span>
+</div>
+
+<div class="cal-grid" id="calGrid"></div>
+
+<div class="nota-dia" id="notaDia" style="display:none;">
+<h4 id="fechaSeleccionada"></h4>
+<textarea id="textoNota" placeholder="Escribe por qué este día es especial 💜"></textarea>
+<button onclick="guardarNota()" class="btn-centro">Guardar nota</button>
+</div>
+
+</div>
+
+</div>
+
 <div class="nav">
-  <a href="index.html">🏠<br>Inicio</a>
-  <a href="album.html">📖<br>Álbum</a>
-  <a href="musica.html">🎵<br>Música</a>
-  <a href="estadoDeanimo.html">💜<br>Ánimo</a>
+<a href="#">🏠<br>Inicio</a>
+<a href="#">📖<br>Álbum</a>
+<a href="#">🎵<br>Música</a>
+<a href="#">💜<br>Ánimo</a>
 </div>
 
-<script>
-function iniciarSesion(){
-  const user = document.getElementById("usuario").value.trim();
-  const pass = document.getElementById("password").value.trim();
+<script>/* CONTADORES */
 
-  if(user === "Genesy03" && pass === "1901"){
-
-    // guardar sesión
-    localStorage.setItem("sesionNesy", "activa");
-    localStorage.setItem("nombreNesy", "Genesy");
-
-    document.getElementById("ingresoOverlay").style.display = "none";
-    document.querySelector(".app").style.display = "flex";
-
-    // alerta bonita
-    setTimeout(()=>{
-      document.getElementById("alertaBienvenida").style.display = "flex";
-    },300);
-
-  }else{
-    alert("💔 Usuario o contraseña incorrectos");
-  }
-}
-
-
-// -----------------------
-// CONTADOR REAL 💜
-// Todo empezó el 19 de enero a las 9:30 PM
-// -----------------------
+// Fecha de inicio de relación
 const fechaInicio = new Date(2026, 0, 19, 21, 30, 0);
-// año, mes (0 = enero), día, hora, minuto
+const fechaMesInicio = new Date(2026, 2, 20);
 
-function actualizarDias(){
+// Contador de días desde el inicio de la relación
+function actualizarDias() {
   const ahora = new Date();
-  const diferencia = ahora - fechaInicio;
-  const diasTotales = Math.floor(diferencia / (1000 * 60 * 60 * 24)) + 1;
-  document.getElementById("dias").innerText = diasTotales;
+  const dias = Math.floor((ahora - fechaInicio) / (1000 * 60 * 60 * 24)) + 1;
+  document.getElementById("dias").innerText = dias;
 }
 
-actualizarDias();
+// Contador de meses juntos y días para el próximo mes
+function actualizarMeses() {
+  const ahora = new Date();
+  let meses =
+    (ahora.getFullYear() - fechaMesInicio.getFullYear()) * 12 +
+    (ahora.getMonth() - fechaMesInicio.getMonth());
+  if (ahora.getDate() < fechaMesInicio.getDate()) meses--;
+  if (meses < 0) meses = 0;
+  document.getElementById("meses").innerText = meses;
 
-// -----------------------
-// JUEGO
-// -----------------------
-const juegos = [
-  {p:"¿Casa de Harry Potter?", o:["Gryffindor","Slytherin","Ravenclaw"], c:"Gryffindor"},
-  {p:"¿Mejor amigo de Harry?", o:["Ron","Draco","Neville"], c:"Ron"},
-  {p:"¿Hechizo para desarmar?", o:["Expelliarmus","Lumos","Crucio"], c:"Expelliarmus"},
-  {p:"¿Animal mágico de Hagrid?", o:["Hipogrifo","Dragón","Acromántula"], c:"Hipogrifo"},
-  {p:"¿Profesor de Pociones?", o:["Snape","Lupin","Dumbledore"], c:"Snape"},
-  {p:"¿Quidditch es un deporte de?", o:["Muggles","Magos","Dragones"], c:"Magos"},
-  {p:"¿El mapa del merodeador muestra?", o:["Secretos","Pasadizos","Personas"], c:"Personas"},
-  {p:"¿Amigo de Hermione?", o:["Ron","Draco","Neville"], c:"Ron"},
-  {p:"¿El nombre del elfo doméstico?", o:["Dobby","Kreacher","Winky"], c:"Dobby"},
-  {p:"¿Varita de Harry hecha de?", o:["Acebo","Cerezo","Roble"], c:"Acebo"}
-];
-
-// Para seleccionar 5 preguntas aleatorias cada día
-const preguntasDia = [];
-while(preguntasDia.length < 5){
-  const idx = Math.floor(Math.random() * juegos.length);
-  if(!preguntasDia.includes(juegos[idx])) preguntasDia.push(juegos[idx]);
+  let proximo = new Date(ahora.getFullYear(), ahora.getMonth(), 20);
+  if (ahora.getDate() >= 20) {
+    proximo = new Date(ahora.getFullYear(), ahora.getMonth() + 1, 20);
+  }
+  const diasFaltan = Math.ceil((proximo - ahora) / (1000 * 60 * 60 * 24));
+  document.getElementById("cuentaMes").innerText = diasFaltan + " días";
 }
 
-let preguntaActual = 0;
+// Contador de cumpleaños en tiempo real
+function actualizarCumple() {
+  const ahora = new Date();
+  // 22 de agosto -> mes 7, día 22
+  let cumple = new Date(ahora.getFullYear(), 7, 22);
 
-function mostrarPregunta(){
-  const pregunta = preguntasDia[preguntaActual];
-  preguntaJuego.innerText = pregunta.p;
-  opcionesJuego.innerHTML = "";
-  pregunta.o.forEach(op=>{
-    const b = document.createElement("button");
-    b.innerText = op;
-    b.onclick = () => responderPregunta(op === pregunta.c);
-    opcionesJuego.appendChild(b);
-  });
-}
-// ---------------- CALENDARIO ESPECIAL ----------------
-let fechaActual = new Date();
-let fechaSeleccionadaGlobal = null;
-
-function renderCalendario(){
-  const grid = document.getElementById("calGrid");
-  const mesAnio = document.getElementById("mesAnio");
-
-  if(!grid || !mesAnio) return;
-
-  grid.innerHTML = "";
-
-  const mes = fechaActual.getMonth();
-  const anio = fechaActual.getFullYear();
-
-  mesAnio.innerText = fechaActual.toLocaleDateString("es-ES",{
-    month:"long",
-    year:"numeric"
-  });
-
-  const primerDia = new Date(anio, mes, 1).getDay();
-  const totalDias = new Date(anio, mes + 1, 0).getDate();
-
-  // espacios vacíos
-  for(let i = 0; i < primerDia; i++){
-    grid.appendChild(document.createElement("div"));
+  if (ahora > cumple) {
+    cumple = new Date(ahora.getFullYear() + 1, 7, 22);
   }
 
-  // días del mes
-  for(let dia = 1; dia <= totalDias; dia++){
-    const celda = document.createElement("div");
-    celda.innerText = dia;
+  const diferencia = cumple - ahora;
 
-    const clave = `nota-${anio}-${mes}-${dia}`;
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-    if(localStorage.getItem(clave)){
-      celda.classList.add("marcado");
-    }
-
-    celda.onclick = () => seleccionarDia(dia);
-    grid.appendChild(celda);
-  }
+  document.getElementById("cuentaCumple").innerText =
+    `${dias} días ${horas} h ${minutos} m ${segundos} s`;
 }
 
-// cambiar mes
-function cambiarMes(valor){
-  fechaActual.setMonth(fechaActual.getMonth() + valor);
-  renderCalendario();
+// Función que actualiza todos los contadores
+function actualizarContadores() {
+  actualizarDias();
+  actualizarMeses();
+  actualizarCumple();
 }
 
-// seleccionar día
-function seleccionarDia(dia){
-  const mes = fechaActual.getMonth();
-  const anio = fechaActual.getFullYear();
-  fechaSeleccionadaGlobal = `nota-${anio}-${mes}-${dia}`;
+// Ejecutar al cargar
+actualizarContadores();
 
-  const nota = localStorage.getItem(fechaSeleccionadaGlobal);
+// Actualizar cada segundo
+setInterval(actualizarContadores, 1000);
+/* QUIZ */
 
-  document.getElementById("notaDia").style.display = "block";
-  document.getElementById("fechaSeleccionada").innerText =
-    `💜 ${dia}/${mes + 1}/${anio}`;
+const preguntas=[
+{p:"¿Quién es el protagonista?",o:["Yuji Itadori","Gojo","Megumi"],c:"Yuji Itadori"},
+{p:"¿Quién es el hechicero más fuerte?",o:["Gojo","Nanami","Megumi"],c:"Gojo"},
+{p:"¿Qué demonio vive en Yuji?",o:["Sukuna","Mahito","Jogo"],c:"Sukuna"},
+{p:"¿Quién usa las sombras?",o:["Megumi","Gojo","Todo"],c:"Megumi"}
+]
 
-  const textarea = document.getElementById("textoNota");
-  const boton = document.querySelector(".nota-dia button");
+let actual=0
+let puntos=0
 
-  if(nota){
-    textarea.value = nota;
-    textarea.readOnly = true;
-    textarea.style.background = "#eee";
-    boton.style.display = "none";
-  } else {
-    textarea.value = "";
-    textarea.readOnly = false;
-    textarea.style.background = "#fff";
-    boton.style.display = "block";
-  }
+function cargarPregunta(){
+
+const q=preguntas[actual]
+
+preguntaJuego.innerText=q.p
+
+opcionesJuego.innerHTML=""
+
+q.o.forEach(op=>{
+
+const btn=document.createElement("button")
+
+btn.innerText=op
+
+btn.onclick=()=>{
+
+if(op==q.c){
+puntos++
 }
 
-// guardar nota (bloqueo definitivo)
-function guardarNota(){
-  const textarea = document.getElementById("textoNota");
-  const texto = textarea.value.trim();
+actual++
 
-  if(texto === ""){
-    alert("💜 Escribe algo bonito antes de guardar 💜");
-    return;
-  }
-
-  localStorage.setItem(fechaSeleccionadaGlobal, texto);
-
-  textarea.readOnly = true;
-  textarea.style.background = "#eee";
-  document.querySelector(".nota-dia button").style.display = "none";
-
-  renderCalendario();
-  alert("💜 Este recuerdo quedó guardado para siempre 💜");
+if(actual<preguntas.length){
+cargarPregunta()
+}else{
+terminarJuego()
 }
 
-// inicializar
-renderCalendario();
-function responderPregunta(correcto){
-  alertaJuego.className = "alerta-juego " + (correcto?"correcto":"incorrecto");
-  alertaJuego.innerText = correcto?"✨ Muy bien ✨":"💫 Intenta otra vez";
-  alertaJuego.style.display="block";
-  setTimeout(()=>alertaJuego.style.display="none",2000);
-
-  if(correcto){
-    preguntaActual++;
-    if(preguntaActual >= preguntasDia.length){
-      preguntaJuego.innerText = "🎉 Juego terminado por hoy 🎉";
-      opcionesJuego.innerHTML = "";
-      return;
-    }
-    setTimeout(mostrarPregunta, 800); // pequeña pausa antes de la siguiente
-  }
 }
 
-// Mostrar la primera pregunta
-mostrarPregunta()
-// -------- MODAL ESTADÍSTICAS --------
-function abrirModalStats(){
-  document.getElementById("modalStats").style.display="flex";
+opcionesJuego.appendChild(btn)
+
+})
+
 }
 
-function cerrarModalStats(){
-  document.getElementById("modalStats").style.display="none";
-}
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-  }, 3500);
-};
-// -------- ACTIVIDAD DEL NOVIECITO --------
-const actividades = [
-  "🏀 Jugando baloncesto",
-  "💼 Trabajando",
-  "🧹 Limpiando la casa",
-  "🎧 Escuchando música",
-  "😴 Descansando",
-  "💜 Pensando en ti"
-];
+function terminarJuego(){
 
-const actividadSpan = document.getElementById("statActividad");
+preguntaJuego.innerText="🔥 Terminaste el quiz"
 
-function cambiarActividad(){
-  const random = Math.floor(Math.random() * actividades.length);
-  actividadSpan.textContent = actividades[random];
+opcionesJuego.innerHTML=""
+
+resultadoJuego.innerText="Tu puntaje: "+puntos+" / "+preguntas.length
+
 }
 
-cambiarActividad();
-// -----------------------
-// CARTITA
-// -----------------------
-const mensajes = [
-  "Hola, mi niña hermosa 💖. Quiero decirte que eres la persona más espectacular que he conocido. Admiro cada cosa de ti, tu forma de ser, tu sonrisa, tu corazón… todo en ti me inspira. Quiero ser parte de tu vida, llenarla de amor y felicidad porque tú mereces lo más bonito del mundo.\n\nEres la persona que quiero a mi lado, hoy y siempre. Sueño con que podamos construir juntos una vida llena de momentos felices, hacernos viejitos juntos, reírnos de todo, apoyarnos en todo y formar una familia hermosa, llena de amor y alegría.\n\nQuiero estar contigo en cada instante, ser tu apoyo, tu compañía, tu refugio… quiero verte, abrazarte y decirte con el corazón lo mucho que te quiero y lo importante que eres para mí. Cada día que pasa, mis sentimientos por ti crecen más y más, y solo deseo hacerte feliz.\n\nTe quiero muchísimo, mi princesa, y quiero que siempre recuerdes que eres mi todo. Muaaak 😘💖",
+cargarPregunta()
 
-  "Hola, mi niña hermosa 💖. Quiero decirte que eres la persona más espectacular que he conocido. Admiro cada cosa de ti, tu forma de ser, tu sonrisa, tu corazón… todo en ti me inspira. Quiero ser parte de tu vida, llenarla de amor y felicidad porque tú mereces lo más bonito del mundo.\n\nEres la persona que quiero a mi lado, hoy y siempre. Sueño con que podamos construir juntos una vida llena de momentos felices, hacernos viejitos juntos, reírnos de todo, apoyarnos en todo y formar una familia hermosa, llena de amor y alegría.\n\nQuiero estar contigo en cada instante, ser tu apoyo, tu compañía, tu refugio… quiero verte, abrazarte y decirte con el corazón lo mucho que te quiero y lo importante que eres para mí. Cada día que pasa, mis sentimientos por ti crecen más y más, y solo deseo hacerte feliz.\n\nTe quiero muchísimo, mi princesa, y quiero que siempre recuerdes que eres mi todo. Muaaak 😘💖",
-  "Cada día me gustas un poco más ✨",
-  "Gracias por existir 💫"
-];
+/* CARTITA */
+
+const mensajes=[
+"💜 Me gustas más cada día",
+"💜 Gracias por estar conmigo",
+"💜 Eres la niña más especial"
+]
 
 function mostrarCartita(){
-  mensajeCartita.innerText=mensajes[new Date().getDate()%mensajes.length];
+
+mensajeCartita.innerText=mensajes[Math.floor(Math.random()*mensajes.length)]
+
 }
 
-window.addEventListener("load", ()=>{
-  const sesion = localStorage.getItem("sesionNesy");
+/* CALENDARIO */
 
-  if(sesion === "activa"){
-    document.getElementById("ingresoOverlay").style.display = "none";
-    document.querySelector(".app").style.display = "flex";
-  }
-});
-function cerrarBienvenida(){
-  document.getElementById("alertaBienvenida").style.display = "none";
+let fechaActual=new Date()
+let fechaSeleccionadaGlobal=null
+
+function renderCalendario(){
+
+const grid=document.getElementById("calGrid")
+const mesAnio=document.getElementById("mesAnio")
+
+grid.innerHTML=""
+
+const mes=fechaActual.getMonth()
+const anio=fechaActual.getFullYear()
+
+mesAnio.innerText=fechaActual.toLocaleDateString("es-ES",{month:"long",year:"numeric"})
+
+const primerDia=new Date(anio,mes,1).getDay()
+const totalDias=new Date(anio,mes+1,0).getDate()
+
+for(let i=0;i<primerDia;i++){
+grid.appendChild(document.createElement("div"))
 }
+
+for(let dia=1;dia<=totalDias;dia++){
+
+const celda=document.createElement("div")
+celda.innerText=dia
+
+const clave=`nota-${anio}-${mes}-${dia}`
+
+if(localStorage.getItem(clave)){
+celda.classList.add("marcado")
+}
+
+celda.onclick=()=>seleccionarDia(dia)
+
+grid.appendChild(celda)
+
+}
+
+}
+
+function cambiarMes(valor){
+
+fechaActual.setMonth(fechaActual.getMonth()+valor)
+renderCalendario()
+
+}
+
+function seleccionarDia(dia){
+
+const mes=fechaActual.getMonth()
+const anio=fechaActual.getFullYear()
+
+fechaSeleccionadaGlobal=`nota-${anio}-${mes}-${dia}`
+
+const nota=localStorage.getItem(fechaSeleccionadaGlobal)
+
+document.getElementById("notaDia").style.display="block"
+
+document.getElementById("fechaSeleccionada").innerText=`💜 ${dia}/${mes+1}/${anio}`
+
+const textarea=document.getElementById("textoNota")
+
+if(nota){
+textarea.value=nota
+}else{
+textarea.value=""
+}
+
+}
+
+function guardarNota(){
+
+const texto=document.getElementById("textoNota").value
+
+localStorage.setItem(fechaSeleccionadaGlobal,texto)
+
+renderCalendario()
+
+alert("💜 Recuerdo guardado")
+
+}
+
+renderCalendario()
 
 </script>
-<div id="alertaBienvenida" style="
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.45);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:5000;
-">
-  <div style="
-    background:#fff;
-    padding:30px 25px;
-    border-radius:28px;
-    max-width:360px;
-    text-align:center;
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
-    animation:subir .4s ease;
-  ">
-    <h2 style="color:#8e44ad;">Hola Genesy 💜</h2>
-    <p style="margin:15px 0; font-weight:600;">
-      Bienvenida a <b>Nesy</b><br>
-      una app creada especialmente para ti ✨
-    </p>
-    <button onclick="cerrarBienvenida()">Entrar</button>
-  </div>
-</div>
 
 </body>
 </html>
